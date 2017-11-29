@@ -1,0 +1,32 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>Chat me!</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+<div id="logo">  <img src="../images/hope.jpg" style="max-width:100%;height:auto;"/> </div>
+<div id="log">
+    <form action="">
+        <input id="uN" name="UserName" type="text" placeholder="User name">
+        <input name="password" type="password" placeholder="Password">
+        <input name="logInBut" type="button"  value="Log In">
+       <!-- <input name="CreateAccBut" type="button" onclick="" value="Create Account"> -->
+    </form>
+</div>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    $(function () {
+        var socket = io();
+        document.getElementsByName("logInBut")[0].addEventListener('click',LogInUser);
+        function LogInUser(){
+            socket.emit('user LogIn',$('#uN').val() );
+            //console.log($('#uN').val());
+            location.href = "/chat";
+            return false;};
+    });
+</script>
+</body>
+</html>
+</html>
