@@ -4,6 +4,7 @@ $(function () {
     function LogInUser(){
         socket.emit('user LogIn',$('#uN').val() );
         //console.log($('#uN').val());
-        location.href = "/chat";
+       // location.href = "/chat";
         return false;};
 });
+

@@ -98,13 +98,12 @@ io.on('connection', function(socket){
     });
 
     socket.on('disconnect',function(){
-        io.emit('system msg',socket.id + " is disconnected");
+       // io.emit('system msg',socket.id + " is disconnected");
     })
     socket.on('user LogIn',function(UserName){
-        console.log(UserName + " is connected")
-
-        //io.emit('system msg',UserName + " is connected");
-        //io.emit('UserName',UserName);
+      //  console.log(UserName + " is connected")
+       // io.emit('system msg',UserName + " is connected");
+       // io.emit('UserName',UserName);
     });
 
 });
