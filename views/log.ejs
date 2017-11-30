@@ -16,17 +16,7 @@
 </div>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-    $(function () {
-        var socket = io();
-        document.getElementsByName("logInBut")[0].addEventListener('click',LogInUser);
-        function LogInUser(){
-            socket.emit('user LogIn',$('#uN').val() );
-            //console.log($('#uN').val());
-            location.href = "/chat";
-            return false;};
-    });
-</script>
+<script src="../JS/log.js"></script>
 </body>
 </html>
 </html>
