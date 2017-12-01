@@ -1,4 +1,6 @@
 var express = require('express');
+var database = require('../databaseMongo/db.js');
+
 
 exports.form = function (req,res){
 
@@ -8,14 +10,24 @@ exports.form = function (req,res){
 
     var errors = req.validationErrors();
     console.log(errors);
-    if (errors) res.render('./log.ejs',{error: errors});
+    if (errors)
+        res.render('./log.ejs',{error: errors});
     else {
-    var User  = {
-        name : "Bianca",
-        lastName : "Floriana",
-        username : req.body.userName,
-        CNP : 1234567891234,
-        password: req.body.password };
-    console.log(User)
-    res.render('./chat.ejs');}
+        var User  = {
+            name : "Bianca",
+            lastName : "Floriana",
+            username : req.body.userName,
+            CNP : 1234567891234,
+            password: req.body.password };
+        database.findUser(User.username, User.password, function (found) {
+            if(found){
+                res.render('./chat.ejs');
+                console.log("You can go on chat page!");
+            }else{
+                res.render('./log.ejs', {error: ""});
+                console.log("Your username / password is incorrect!");
+            }
+
+        } );
+    }
 };
