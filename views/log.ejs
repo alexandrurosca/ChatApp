@@ -7,13 +7,18 @@
 <body>
 <div id="logo">  <img src="../images/hope.jpg" style="max-width:100%;height:auto;"/> </div>
 <div id="log">
-    <form  method="post">
-        <input id="uN" name="userName" type="text" placeholder="User name">
-        <input name="password" type="password" placeholder="Password">
-        <!--<input name="logInBut" type="button"  value="Log In">
-       <!-- <input name="CreateAccBut" type="button" onclick="" value="Create Account"> -->
+   <form  method="post">
+        <input id="userName" name="userName" type="text" placeholder="User name">
+        <input id="password" name="password" type="password" placeholder="Password">
         <button>Log In</button>
-        </form>
+       <input id="createAcc" name="createAcc" type="button"  value="Create Account">
+   </form>
+</div>
+
+<div id="errors">
+    <% for(var i=0; i < error.length; i++) { %>
+        <%= error[i].msg %><br>
+    <% } %>
 </div>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>

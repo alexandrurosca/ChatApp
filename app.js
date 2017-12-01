@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var logIn = require('./routes/log');
 var chat = require('./routes/chat');
+var createAcc = require('./routes/createAcc');
 var app = express();
 
 // view engine setup
@@ -23,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', logIn);
 app.use('/chat',chat);
-
+app.use('/createAccountForm',createAcc);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
