@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', logIn);
 app.use('/chat',chat);
-app.use('/createAccountForm',createAcc);
+app.use('/createAccount',createAcc);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

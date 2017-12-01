@@ -9,8 +9,7 @@
 });*/
 document.getElementById('createAcc').addEventListener('click',changeToCreateAcc);
 function changeToCreateAcc(){
-    $(document).ready(function(){
-        $('#log').load("./createAccountForm");
-    });
+    window.location="./createAccount";
+
 }
 

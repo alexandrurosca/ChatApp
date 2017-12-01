@@ -1,0 +1,29 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>Chat me!</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+<div id="logo">  <img src="../images/hope.jpg" style="max-width:100%;height:auto;"/> </div>
+<div id="log">
+    <form  method="post">
+        <input id="firstName" name="firstName" type="text" placeholder="First Name">
+        <input id="lastName" name="lastName" type="text" placeholder="Last Name">
+        <input id="CNP" name="CNP" type="text" placeholder="CNP">
+        <input id="userName" name="userName" type="text" placeholder="User name">
+        <input id="password" name="password" type="password" placeholder="Password">
+        <button id="cAcc">Create Account</button>
+    </form>
+</div>
+
+<div id="errors">
+    <% for(var i=0; i < error.length; i++) { %>
+    <%= error[i].msg %><br>
+    <% } %>
+</div>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+</body>
+</html>
+</html>
