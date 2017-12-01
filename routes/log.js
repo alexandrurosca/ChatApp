@@ -1,20 +1,13 @@
 var express = require('express');
 var router = express.Router();
-router.get('/', function(req, res){
-    res.render('./log.ejs');
+var expressValidator = require('express-validator');
+router.use(expressValidator())
+var formHandler = require('../public/JS/formHandler');
+
+router.get('/', function (req,res) {
+    res.render('./log.ejs',{error: ""});
 });
-router.post('/', function(req, res){
-    res.render('./chat.ejs');
 
-    //add validations
-
-    var User  = {
-        name : "Bianca",
-        lastName : "Floriana",
-        username : req.body.userName,
-        CNP : 1234567891234,
-        password: req.body.password };
-    console.log(User);
-    });
+router.post('/', formHandler.form);
 
 module.exports = router;
