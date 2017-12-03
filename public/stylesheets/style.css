@@ -37,14 +37,7 @@ button{
   width:49%;
   float: left;
 }
-div [id='errors']{
-  overflow: auto;
-  width: 25vw;
-  min-width: 210px;
-  max-width: 25vw;
-  height: auto;
-  margin: 0% 37.5%;
-  padding: 0.1% 0.1%;}
+
 input[id='createAcc']{ padding: 3% 3%;
     margin: 0.5% 0%;
     box-sizing: border-box;
@@ -57,3 +50,16 @@ input[id='createAcc']{ padding: 3% 3%;
     float: left;
     margin: 0.5% 0.5%;}
 button[id='cAcc']{width:100%;}
+div[id='errors']{
+    padding: 0.5% 2%;
+    font-size: 20px;
+    color: #F26101;
+    width: 25vw;
+    min-width: 210px;
+    max-width: 25vw;
+    height: auto;
+    margin: 0% 37.5%;
+}
+*:focus {
+    outline: none;
+}

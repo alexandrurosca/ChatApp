@@ -8,12 +8,12 @@ exports.addUser = function (obj, callback) {
         if (err) throw err;
         db.collection("users").insertOne(obj, function (err, res) {
             if (err) throw err;
-            console.log("one user  inserted ", res);
+            console.log("one user  inserted ");
             db.close();
             callback();
-            //aad
         });
     });
+
 }
 
 exports.findUsername = function(username, callback ){
