@@ -11,6 +11,7 @@ exports.addUser = function (obj, callback) {
             console.log("one user  inserted ", res);
             db.close();
             callback();
+            //aad
         });
     });
 }
