@@ -88,13 +88,19 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
+var i=0;
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-
+        if(i<2){socket.join('Room1');}
+        else
+        {socket.join('Room2');}
+        i++;
+    console.log(i);
+        console.log(socket.rooms);
     socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
+        io.to(Object.keys(socket.rooms)[1]).emit('chat message', msg);
+        console.log(Object.keys(socket.rooms)[1]);
     });
 
     socket.on('disconnect',function(){
