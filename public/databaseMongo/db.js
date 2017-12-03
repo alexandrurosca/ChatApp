@@ -10,6 +10,7 @@ exports.addUser = function (obj, callback) {
             if (err) throw err;
             console.log("one user  inserted ", res);
             db.close();
+            callback();
         });
     });
 }
