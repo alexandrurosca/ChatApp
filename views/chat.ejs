@@ -5,7 +5,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font: 13px Helvetica, Arial; }
-        form {  background: #F26101; padding: 3px; position: ; bottom: 0; width: 100%; position: absolute; left: 0}
+        form[id=chat] {  background: #F26101; padding: 3px; position: ; bottom: 0; width: 100%; position: absolute; left: 0}
         form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; background:#F26101;}
         form button { width: 9%; background: white; border: none; padding: 10px; border-radius: 50px; border:solid 1px; border-color: white;}
         #messages { list-style-type: none; margin: 0; padding: 0; }
@@ -19,7 +19,7 @@
     <ul id="messages"></ul>
 
 
-<form action="" method="post">
+<form id='chat' action="" method="post">
     <input id="m" autocomplete="off" /><button>Send</button>
 </form>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>

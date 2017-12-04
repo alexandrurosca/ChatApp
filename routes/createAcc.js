@@ -9,4 +9,5 @@ router.get('/', function(req, res){
 });
 
 router.post('/', formCreateAccHandler.form);
+
 module.exports = router;

@@ -39,7 +39,7 @@ exports.form = function (req,res){
                 res.render('./createAccount.ejs', {error: ""});
 
             } else {database.addUser(user, function () {
-                res.render('./log.ejs', {error: ""});
+                res.redirect("http://localhost:3000/");
             });}
         });
 
