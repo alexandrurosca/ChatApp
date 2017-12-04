@@ -5,18 +5,21 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font: 13px Helvetica, Arial; }
-        form { background: #0026c6; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-        form button { width: 9%; background: rgb(43, 255, 18); border: none; padding: 10px; }
+        form {  background: #F26101; padding: 3px; position: ; bottom: 0; width: 100%; position: absolute; left: 0}
+        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; background:#F26101;}
+        form button { width: 9%; background: white; border: none; padding: 10px; border-radius: 50px; border:solid 1px; border-color: white;}
         #messages { list-style-type: none; margin: 0; padding: 0; }
         #messages li { padding: 5px 10px; }
         #messages li:nth-child(odd) { background: #ee0017; }
         #messages { margin-bottom: 40px }
+
     </style>
 </head>
 <body>
-<ul id="messages"></ul>
-<form action="">
+    <ul id="messages"></ul>
+
+
+<form action="" method="post">
     <input id="m" autocomplete="off" /><button>Send</button>
 </form>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>

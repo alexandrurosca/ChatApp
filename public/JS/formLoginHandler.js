@@ -7,7 +7,7 @@ exports.form = function (req,res){
     //validations
     req.checkBody('userName','Must insert a user!').notEmpty();
     req.checkBody('password','Must insert a password!').notEmpty();
-
+    console.log("sunt aici");
     var errors = req.validationErrors();
     console.log(errors);
     if (errors)
@@ -16,10 +16,8 @@ exports.form = function (req,res){
 
         database.findUser(req.body.userName, req.body.password, function (found) {
             if(found){
+                res.render('./chatTemplate.ejs');
                 console.log("You can go on chat page!");
-
-                res.render('./chat.ejs');
-
             }else{
                 console.log("Your username / password is incorrect!");
                 var error =[
@@ -28,7 +26,7 @@ exports.form = function (req,res){
                 ];
                 console.log(error[0].msg);
                 console.log(error.length);
-                res.render('./log.ejs', {error: error});
+                res.render('/', {error: error});
 
             }
 
