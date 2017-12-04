@@ -16,8 +16,10 @@ exports.form = function (req,res){
 
         database.findUser(req.body.userName, req.body.password, function (found) {
             if(found){
-                res.render('./chat.ejs');
                 console.log("You can go on chat page!");
+
+                res.render('./chat.ejs');
+
             }else{
                 console.log("Your username / password is incorrect!");
                 var error =[

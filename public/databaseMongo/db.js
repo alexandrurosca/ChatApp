@@ -36,6 +36,7 @@ exports.findUser = function(username,password, callback ){
         if (err) throw err;
         var query = { username: username, password: password};
         db.collection("users").find(query).toArray(function(err, result) {
+            console.log(result);
             if (err) throw err;
             foundUser = ((result.length != 0) ? true : false);
             db.close();
@@ -43,6 +44,72 @@ exports.findUser = function(username,password, callback ){
         });
     });
 }
+
+exports.findCNP= function(cnp, callback ){
+    var foundUser = false;
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var query = { cnp: cnp};
+        db.collection("users").find(query).toArray(function(err, result) {
+            if (err) throw err;
+            foundUser = ((result.length != 0) ? true : false);
+            db.close();
+            callback(foundUser);
+        });
+    });
+}
+
+
+exports.addUser = function (obj, callback) {
+
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        db.collection("users").insertOne(obj, function (err, res) {
+            if (err) throw err;
+            console.log("one user  inserted ");
+            db.close();
+            callback();
+        });
+    });
+
+}
+
+exports.addFriend = function (username,friend, callback) {
+
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        db.collection("users").updateOne({username: username},{$addToSet: {friends: friend}},function (err) {
+            if (err) throw err;
+            db.close();
+            callback();
+        })
+    });
+}
+
+exports.findFriends= function(username, callback ){
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        db.collection("users").findOne({username: username}, function(err, result) {
+            if (err) throw err;
+            db.close();
+            callback(result.friends);
+        });
+    });
+}
+
+exports.deleteFriend = function (username, friend, callback) {
+
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        db.collection("users").updateOne({username: username},{$pull: {friends: friend}},function (err) {
+            if (err) throw err;
+            db.close();
+            callback();
+        })
+    });
+}
+
+
 
 
 
