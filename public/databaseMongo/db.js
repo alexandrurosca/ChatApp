@@ -25,7 +25,7 @@ exports.findUsername = function(username, callback ){
             if (err) throw err;
             foundUser = ((result.length != 0) ? true : false);
             db.close();
-            callback(foundUser);
+            callback(foundUser, result);
         });
     });
 }
@@ -40,7 +40,7 @@ exports.findUser = function(username,password, callback ){
             if (err) throw err;
             foundUser = ((result.length != 0) ? true : false);
             db.close();
-            callback(foundUser);
+            callback(foundUser, result[0].username);
         });
     });
 }
