@@ -4,10 +4,9 @@
     <link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">
 </head>
 <body>
-
 <div class="col-3 friendList">
     <div class="row friend" id='Friend1'>
-        Friend1
+        <%= user.username%>
     </div>
     <div class="row friend" id='Friend1'>
         Friend1
@@ -16,6 +15,10 @@
 
 <div class="row">
     <div class="col-9 buttons" id='options'>
+        <form id='addFriends'action="" method="post">
+            <input id="nameFriendInput" autocomplete="off" />
+           <button>Add</button>
+        </form>
         <div class="col-2 button" >
             <input id= 'account' name="account" type="button" value="Account">
         </div>
@@ -64,10 +67,7 @@
 </div>
 <div class="col-3" id='optionsFriends'>
     <div class='col-3 opf' id='op1'>
-        <form id='add'action="" method="post">
-            <input id="nameFriend" autocomplete="off" />
-        <input id= 'addFriend' name="addFriend" type="button" value="AddFriend">
-        </form>
+
     </div>
 
 
@@ -78,6 +78,5 @@
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="../JS/ChatTemplateHandler.js"></script>
-
 </body>
 </html>
