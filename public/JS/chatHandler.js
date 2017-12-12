@@ -22,7 +22,7 @@ $(function () {
     socket.on('chat message', function(msg){
         //console.log("this is from chat: ", user );
         $('#messages').append($('<li>').text(msg.name + ":" +msg.msg));
-        window.scrollTo(0, document.body.scrollHeight);
+        $('#msg').scrollTop($('#msg')[0].scrollHeight);
     });
     socket.on('system msg', function(msg){
         $('#messages').append($('<li>').text(msg));
