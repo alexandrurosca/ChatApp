@@ -40,6 +40,7 @@ exports.findUser = function(username,password, callback ){
             if (err) throw err;
             foundUser = ((result.length != 0) ? true : false);
             db.close();
+            /asda
             callback(foundUser, result[0]);
         });
     });
