@@ -13,11 +13,12 @@ var session = require('client-sessions');
 var app = express();
 
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 //cookies
 app.use(session({
@@ -29,18 +30,32 @@ app.use(session({
     secure: true,
     ephemeral: true
 }));
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(function(req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+});
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+//app.use(session({resave: true, saveUninitialized: true, secret: 'SOMERANDOMSECRETHERE', cookie: { maxAge: 60000 }}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', logIn);
 app.use('/chat',chat);
 app.use('/chatTemplate',chatTemplate);
 app.use('/createAccount',createAcc);
+
+
+
+
+// app.use(function (req, res, next) {
+//     if(!req.session.user){
+//         req.session.user = {}
+//     }
+// })
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -11,6 +11,6 @@ module.exports = router;
 var express = require('express');
 var router = express.Router();
 router.get('/', function(req, res){
-    res.render('./chat.ejs');
+    res.render('./chat.ejs', {user: req.session.user});
 });
 module.exports = router;

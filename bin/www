@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('untitled:server');
 var http = require('http');
+var database = require('../public/databaseMongo/db');
 
 /**
  * Get port from environment and store in Express.
@@ -95,7 +96,7 @@ io.on('connection', function(socket){
         if(i<2){socket.join('Room1');}
         else
         {socket.join('Room2');}
-        i++;
+       // i++;
     console.log(i);
         console.log(socket.rooms);
     socket.on('chat message', function(msg){
@@ -112,6 +113,19 @@ io.on('connection', function(socket){
         io.emit('system msg',UserName + " is connected");
         io.emit('UserName',UserName);
     });
+
+    socket.on('add friend', function (username, friend) {
+        console.log("username: " + username + " friend: " + friend);
+        database.addFriend(username, friend, function (modified) {
+            var message;
+            if(modified){
+                message = friend + " has been added in your friend list";
+            }else{
+                message = friend + " has not been added in your friend list";
+            }
+          socket.emit('confirm add friend', message);
+        })
+    })
 
 });
 

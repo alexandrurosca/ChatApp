@@ -1,6 +1,6 @@
-var express = require('express');
+//var express = require('express');
 var database = require('../databaseMongo/db.js');
-
+var cookieParser = require('cookie-parser');
 
 exports.form = function (req,res){
 
@@ -15,11 +15,10 @@ exports.form = function (req,res){
 
         database.findUser(req.body.userName, req.body.password, function (found , user) {
             if(found){
-                //cookies
-                console.log("This is a user: ", user);
                 req.session.user = user;
-                console.log(req.session.user);
-                res.render('./chatTemplate.ejs');
+
+                res.cookie('user', user.username);
+                res.render('./chatTemplate.ejs', {user: user});
                 console.log("You can go on chat page!");
             }else{
                 console.log("Your username / password is incorrect!");

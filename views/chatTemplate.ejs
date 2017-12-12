@@ -4,26 +4,26 @@
     <link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">
 </head>
 <body>
-
 <div class="col-3 friendList">
     <div class="row friend" id='Friend1'>
-        <input id= 'friend1' class="displayFriend" type="button" value="Friend1">
+        <%= user.username%>
     </div>
-    <div class="row friend" id='Friend2'>
-
+    <div class="row friend" id='Friend1'>
+        Friend1
     </div>
-
 </div>
 
 <div class="row">
-
     <div class="col-9 buttons" id='options'>
-
+        <form id='addFriends'action="" method="post">
+            <input id="nameFriendInput" autocomplete="off" />
+           <button>Add</button>
+        </form>
         <div class="col-2 button" >
-            <input class='change' id= 'account' name="account" type="button" value="Account">
+            <input id= 'account' name="account" type="button" value="Account">
         </div>
         <div class="col-2 button" >
-            <input  class='change' id= 'logOut' name="logOut" type="button" value="Log Out">
+            <input id= 'logOut' name="logOut" type="button" value="Log Out">
         </div>
     </div>
 
@@ -44,10 +44,10 @@
 
     <div class="col-9 conversation" id= 'conversations'>
         <div class="col-2 conversationFriend" >
-            <input id= 'conversation1' class='change' type="button" value="Friend1">
+            <input id= 'conversation1' type="button" value="Friend1">
         </div>
         <div class="col-2 conversationFriend" >
-            <input id= 'conversation1'  class='change' type="button" value="Friend2">
+            <input id= 'conversation1' type="button" value="Friend2">
         </div>
     </div>
 
@@ -67,12 +67,9 @@
 </div>
 <div class="col-3" id='optionsFriends'>
     <div class='col-3 opf' id='op1'>
+
     </div>
-    <div class="popup" onclick="myFunction()">Click me!
-        <span class="popuptext" id="myPopup">
-             <input id="m" autocomplete="off" />
-        </span>
-    </div>
+
 
     <div class='col-1 opf' id='op2'>
         Op1
@@ -81,6 +78,5 @@
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="../JS/ChatTemplateHandler.js"></script>
-
 </body>
 </html>
