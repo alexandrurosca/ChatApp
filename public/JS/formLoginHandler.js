@@ -1,4 +1,4 @@
-//var express = require('express');
+var express = require('express');
 var database = require('../databaseMongo/db.js');
 
 
@@ -18,7 +18,7 @@ exports.form = function (req,res){
                 //cookies
                 console.log("This is a user: ", user);
                 req.session.user = user;
-
+                console.log(req.session.user);
                 res.render('./chatTemplate.ejs');
                 console.log("You can go on chat page!");
             }else{

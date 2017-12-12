@@ -1,4 +1,6 @@
 $(function () {
+
+
     var socket = io();
     var id;
 
@@ -15,7 +17,8 @@ $(function () {
     });
     socket.on('chat message', function(msg){
         $('#messages').append($('<li>').text(msg.name + ":" +msg.msg));
-        window.scrollTo(0, document.body.scrollHeight);
+        $('#msg').scrollTop($('#msg')[0].scrollHeight);
+        // window.scrollTo(0, document.body.scrollHeight);
     });
     socket.on('system msg', function(msg){
         $('#messages').append($('<li>').text(msg));
@@ -24,3 +27,4 @@ $(function () {
         UserName=Username;
     });
 });
+
