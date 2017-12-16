@@ -9,6 +9,8 @@ exports.form = function (req,res){
     req.checkBody('password','Must insert a password!').notEmpty();
     var errors = req.validationErrors();
     console.log(errors);
+
+    //destroy cookie
     if (errors)
         res.render('./log.ejs',{error: errors});
     else {

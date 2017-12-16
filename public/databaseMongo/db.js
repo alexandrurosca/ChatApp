@@ -36,7 +36,7 @@ exports.findUser = function(username,password, callback ){
         if (err) throw err;
         var query = { username: username, password: password};
         db.collection("users").find(query, { _id: false, password: false, CNP: false}).toArray(function(err, result) {
-            console.log(result);
+            //console.log(result);
             if (err) throw err;
             foundUser = ((result.length != 0) ? true : false);
             db.close();
