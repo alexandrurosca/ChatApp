@@ -89,11 +89,14 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-var i=0;
 var io = require('socket.io')(server);
 
+var Rooms;
+var waitforit;
 io.on('connection', function(socket){
-
+    console.log(Object.keys(io.sockets.adapter.rooms)[0]);
+    socket.on('existOpenedRooms',existOpenedRooms)
+    existOpenedRooms();
     socket.on('friendsList',function (username) {
         database.findFriends(username,function (result) {
             console.log("List of friends:", result);
@@ -101,13 +104,6 @@ io.on('connection', function(socket){
         });
     });
 
-
-    if(i<2){socket.join('Room1');}
-        else
-        {socket.join('Room2');}
-       // i++;
-    console.log(i);
-        console.log(socket.rooms);
     socket.on('chat message', function(msg){
         io.to(Object.keys(socket.rooms)[1]).emit('chat message', msg);
         console.log(Object.keys(socket.rooms)[1]);
@@ -115,7 +111,8 @@ io.on('connection', function(socket){
 
     socket.on('disconnect',function(){
         io.emit('system msg',socket.id + " is disconnected");
-    })
+    });
+
     socket.on('user LogIn',function(UserName){
         console.log(UserName + " is connected")
 
@@ -134,7 +131,29 @@ io.on('connection', function(socket){
             }
           socket.emit('confirm add friend', message);
         })
-    })
+    });
+
+    socket.on('createConversation',function(username,friendUsername){
+        socket.join(username+friendUsername);
+        socket.emit('createConversation');
+        io.emit('connectToRoom',username,friendUsername);
+    });
+
+    socket.on('connectToRoom',function (room) {
+        console.log("user2connect");
+        socket.join(room);
+        socket.emit('createConversation');
+    });
 
 });
 
+function existOpenedRooms(username) {
+        username== waitforit;
+//        socket.join()
+};
+
+function  connectToRoom(room) {
+    console.log("user2connect");
+    socket.join(room);
+    socket.emit('createConversation');
+}

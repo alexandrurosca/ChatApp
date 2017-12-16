@@ -10,7 +10,7 @@ $.getScript('JS/cookieHandler.js', function() {
 });
 
 $(document).ready(function(){
-         $('#chat').load("./chat");
+       //  $('#chat').load("./chat");
            });
 
 $(function () {
@@ -26,12 +26,35 @@ $(function () {
         })
     })
 
-
+   // socket.emit('existOpenedRooms',username);
     socket.on('friendsList',function (friends) {
-
-        for(var  i=1;i<friends.length;i++){
-            $('#friendsList').innerHTML+= "<div class=\"row friend\" id='Friend1' friends[i].val();</div>";
+        var friendsList = document.getElementById('friendsList');
+        try{
+                var lenghtF = friends.length;
+            for(var  i=0;i<lenghtF;i++) {
+                friendsList.innerHTML += "<div class=\"row friend\" id=" + i + ">" + friends[i] + "</div>";
+                var friend = document.getElementById(i.toString());
+                friend.addEventListener('click',function(){
+                    console.log("yes");
+                    socket.emit('createConversation',username,friend.innerText);
+                });
+            }}
+        catch(err) {
+            friendsList.innerHTML += "<div class=\"row friend\" id=" + i + ">No friends:( </div>";
+            //console.log(err.message);
         }
+
+    });
+
+    socket.on('createConversation',function () {
+        $('#chat').load("./chat");
+    });
+
+    socket.on('connectToRoom',function (friend,thisUsername) {
+        console.log('client part '+ friend);
+        console.log(thisUsername);
+        if (thisUsername==username)
+                socket.emit('connectToRoom',friend+thisUsername);
     });
 });
 
@@ -39,7 +62,11 @@ $(function () {
     $('#add').submit(function(){
        var nameFriend = document.getElementById('nameFriend');
        document.alert(nameFriend);
-});
+}
+
+
+
+);
 
 
 
