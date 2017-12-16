@@ -28,9 +28,9 @@ $(function () {
 
 
     socket.on('friendsList',function (friends) {
-
         for(var  i=1;i<friends.length;i++){
-            $('#friendsList').innerHTML+= "<div class=\"row friend\" id='Friend1' friends[i].val();</div>";
+            var friend = $("<div class=\"row friend\"></div>").text(friends[i]);
+            $('#friendsList').append(friend);
         }
     });
 });
