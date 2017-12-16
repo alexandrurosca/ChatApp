@@ -16,7 +16,7 @@ $(document).ready(function(){
 $(function () {
 
     socket = io();
-
+    //nuuuuu
     $('#addFriends').submit(function () {
         var friendName =$('#nameFriendInput').val();
 
