@@ -93,7 +93,16 @@ var i=0;
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-        if(i<2){socket.join('Room1');}
+
+    socket.on('friendsList',function (username) {
+        database.findFriends(username,function (result) {
+            console.log("List of friends:", result);
+            socket.emit('friendsList',result);
+        });
+    });
+
+
+    if(i<2){socket.join('Room1');}
         else
         {socket.join('Room2');}
        // i++;
@@ -127,21 +136,5 @@ io.on('connection', function(socket){
         })
     })
 
-    socket.on('friendList', function (username) {
-        database.findFriends(username,function (result) {
-            console.log("List of friends: ", result);
-            socket.emit('friendList', result);
-        })
-    })
-
 });
 
-
-/*pt laboratory
-1. Ex E49   simpleChat
-2. Ex E50
-
-3. CourseSection
-4. JUnit
-5. Model Software Complete
-*/
