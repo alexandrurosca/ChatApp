@@ -4,21 +4,17 @@
     <link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">
 </head>
 <body>
-<div class="col-3 friendList">
+<div class="col-3 friendList" id="friendsList">
     <div class="row friend" id='Friend1'>
-        <%= user.username%>
     </div>
-    <div class="row friend" id='Friend1'>
+    <!--<div class="row friend" id='Friend1'>
         Friend1
-    </div>
+    </div> -->
 </div>
 
 <div class="row">
     <div class="col-9 buttons" id='options'>
-        <!--<form id='addFriends'action="" method="post">
-            <input id="nameFriendInput" autocomplete="off" />
-           <button>Add</button>
-        </form> -->
+
         <div class="col-2 button" >
             <input class='change' id= 'account' name="account" type="button" value="Account">
         </div>
@@ -36,9 +32,7 @@
             <img src="https://memegenerator.net/img/images/600x600/11113968/roger-american-dad.jpg" style="max-width:100%;height:auto;"/>
         </div>
         <div class="col-2" id='infoUser'>
-            info<br>
-            bull
-            <br>shit
+            <%= user.username%><br>
         </div>
     </div>
 
@@ -67,9 +61,11 @@
 </div>
 <div class="col-3" id='optionsFriends'>
     <div class='col-3 opf' id='op1'>
-
+        <!--<form id='addFriends'action="" method="post">
+           <input id="nameFriendInput" autocomplete="off" />
+          <button>Add</button>
+       </form> -->
     </div>
-
 
     <div class='col-1 opf' id='op2'>
         Op1
