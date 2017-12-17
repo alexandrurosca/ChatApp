@@ -95,8 +95,7 @@ var Rooms;
 var waitforit;
 io.on('connection', function(socket){
     console.log(Object.keys(io.sockets.adapter.rooms)[0]);
-    socket.on('existOpenedRooms',existOpenedRooms)
-    existOpenedRooms();
+
     socket.on('friendsList',function (username) {
         database.findFriends(username,function (result) {
             console.log("List of friends:", result);
@@ -105,8 +104,8 @@ io.on('connection', function(socket){
     });
 
     socket.on('chat message', function(msg){
-        io.to(Object.keys(socket.rooms)[1]).emit('chat message', msg);
-        console.log(Object.keys(socket.rooms)[1]);
+        io.to(msg.room).emit('chat message', msg);
+        console.log(msg.room);
     });
 
     socket.on('disconnect',function(){
@@ -134,15 +133,16 @@ io.on('connection', function(socket){
     });
 
     socket.on('createConversation',function(username,friendUsername){
+        console.log("connect room :" + username +friendUsername);
         socket.join(username+friendUsername);
-        socket.emit('createConversation');
+        socket.emit('createConversation',username+friendUsername);
         io.emit('connectToRoom',username,friendUsername);
     });
 
     socket.on('connectToRoom',function (room) {
         console.log("user2connect");
         socket.join(room);
-        socket.emit('createConversation');
+        socket.emit('createConversation',room);
     });
 
 });
