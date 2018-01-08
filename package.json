@@ -7,20 +7,20 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "client-sessions": "latest",
     "cookie-parser": "~1.4.3",
+    "dateformat": "^3.0.2",
     "debug": "~2.6.9",
+    "delivery": "latest",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "express-validator": "^4.3.0",
     "express-validators": "^1.0.4",
+    "hashmap": "latest",
     "mongodb": "^2.2.33",
     "morgan": "~1.9.0",
     "popups": "latest",
     "serve-favicon": "~2.4.5",
-    "socket.io": "^1.7.4",
-    "client-sessions": "latest",
-    "hashmap": "latest",
-    "delivery": "latest",
-    "dateformat": "latest"
+    "socket.io": "^1.7.4"
   }
 }

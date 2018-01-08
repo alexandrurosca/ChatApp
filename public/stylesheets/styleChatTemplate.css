@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    border: solid 1px;
+    //border: solid 1px;
 }
 .row::after {
     content: "";
@@ -89,6 +89,10 @@ div[id='msg']{
     overflow: auto;
     border: solid 2px;
     border-color:#F26101;
+
+}
+div[id='options']{
+   padding: 0% 0% 1% 0%
 
 }
 .displayFriend{

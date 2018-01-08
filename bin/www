@@ -215,17 +215,18 @@ io.on('connection', function(socket) {
                 room = friendUsername + username;
             console.log("connect room :" + room);
             socket.join(room);
-            socket.emit('createConversation', room);
+            socket.emit('openChat', room,friendUsername);
             //TODO
             //io.emit('connectToRoom', username, friendUsername);
             //io.to(usersConnected.search(username)).emit('connectToRoom', username, friendUsername);
             io.to(usersConnected.search(friendUsername)).emit('connectToRoom',room);
+            io.to(usersConnected.search(friendUsername)).emit('openChat',room,username)
         });
 
         socket.on('connectToRoom', function (room) {
             console.log("user2connect");
             socket.join(room);
-            socket.emit('createConversation', room);
+            //socket.emit('openChat', room);
         });
 
 

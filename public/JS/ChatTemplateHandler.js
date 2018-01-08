@@ -13,6 +13,20 @@ $(document).ready(function(){
     console.log("Here");
 });
 
+
+// add listener : change room + reload chat
+function addListenerForConversationButton() {
+    var conversations = document.getElementsByClassName('change');
+
+    for (var i = 0; i < conversations.length; i++)
+        conversations[i].addEventListener('click',function(){
+
+            openedRoom = this.id;
+            $('#chat').load("./chat");
+            console.log("am dat click pe conversatia" + this.id);
+
+        });
+}
 $(function () {
     $('#chat').submit(function(){
         var data = {name:username, msg: $('#m').val(), room: openedRoom };
@@ -20,13 +34,12 @@ $(function () {
         $('#m').val('');
         return false;
     });
-
-
-    $('#addFriends1').submit(function () {
+    //add listener for addFriend
+    document.getElementById('addFriendButton').addEventListener('click',function () {
         var friendName =$('#nameFriendInput').val();
         console.log("Here I am", friendName);
-        socket.emit('add friend', username, friendName );
-    });
+        socket.emit('add friend', username, friendName ); })
+
 
     socket.on('confirm add friend', function (data, modified, friendName) {
         alert(data);
@@ -37,7 +50,7 @@ $(function () {
             //TODO: action listener for the new friend
         }
 
-    })
+    });
 
     socket.on('request add friend', function (friend) {
         var confirmAccept = confirm(friend + ' wants to add you!');
@@ -45,7 +58,7 @@ $(function () {
         socket.emit('confirm add friend1', confirmAccept);
     });
 
-   // socket.emit('existOpenedRooms',username);
+    // socket.emit('existOpenedRooms',username);
     socket.on('friendsList',function (friends) {
         socket.emit('user login', username);
         lastIndexOfFriend = friends.length;
@@ -59,12 +72,12 @@ $(function () {
             for(var  i = 0;i<friends.length;i++) {
                 var friend = document.getElementById(i);
 
-                 friend.addEventListener('click',function(){
-                     console.log( this.innerText);
+                friend.addEventListener('click',function(){
+                    console.log( this.innerText);
 
-                     socket.emit('createConversation',username,this.innerText);
-                    /*
-                     try {
+                    socket.emit('createConversation',username,this.innerText);
+
+                    /* try {
                          var openedConversation = document.getElementById(username+this.innerText).innerText;
                      }
                      catch(err) {
@@ -82,9 +95,8 @@ $(function () {
                         })
 
 
-                     }
-                     */
-                     });
+                     }*/
+                });
             }
         }
         catch(err) {
@@ -97,9 +109,30 @@ $(function () {
 
 
 
-    socket.on('createConversation',function (room) {
-        openedRoom = room;
+    socket.on('openChat',function (room,name) {
+
         $('#chat').load("./chat");
+        openedRoom = room;
+
+        try {
+            var openedConversation = document.getElementById(room).innerText;
+        }
+        catch(err) {
+            var openedConversations = document.getElementById('conversations');
+            openedConversations.innerHTML +=
+                "<div class=\"col-2 conversationFriend\" > <input id=" +room +
+                " class='change' type=\"button\" value=" + name+ "></div>";
+            openedRoom = room;
+            addListenerForConversationButton();
+            /*var conversation = document.getElementById(room);
+            console.log(conversation.id);
+            conversation.addEventListener('click',function(){
+
+                console.log("am dat click pe conversatia" + this.id);
+            })*/
+
+        }
+
     });
 
     socket.on('connectToRoom',function (room) {

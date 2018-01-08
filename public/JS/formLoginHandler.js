@@ -19,7 +19,8 @@ exports.form = function (req,res){
 
 
                 res.cookie('user', user.username);
-                res.render('./chatTemplate.ejs', {user: user});
+               // res.render('./chatTemplate.ejs', {user: user});
+                res.redirect("http://localhost:3000/chatTemplate")
                 console.log("You can go on chat page!");
             }else{
                 console.log("Your username / password is incorrect!");
