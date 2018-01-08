@@ -31,7 +31,8 @@ exports.form = function (req,res){
             lastName : req.body.lastName,
             username : req.body.userName,
             CNP : req.body.CNP,
-            password: req.body.password
+            password: req.body.password,
+            friends: ["x"]
         };
         database.findUsername(user.username, function (result) {
             if(result){

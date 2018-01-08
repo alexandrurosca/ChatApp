@@ -33,12 +33,7 @@
     </div>
 
     <div class="col-9 conversation" id= 'conversations'>
-       <!-- <div class="col-2 conversationFriend" >
-            <input id= 'conversation1' class='change' type="button" value="Friend1">
-        </div>
-        <div class="col-2 conversationFriend" >
-            <input id= 'conversation1'  class='change' type="button" value="Friend2">
-        </div> -->
+
     </div>
 
     <div class="col-8" id='chat'>
@@ -57,22 +52,21 @@
 </div>
 <div class="col-3" id='optionsFriends'>
     <div class='col-3 opf' id='op1'>
-        <form id='addFriends'action="" method="post">
-           <input id="nameFriendInput" autocomplete="off" />
-          <button>Add</button>
-       </form>
+        <form id='addFriends1' action="" method="post">
+           <input id="nameFriendInput" autocomplete="off" /><button>Add</button>
+        </form>
     </div>
+    <!-- <form id='chat' action="" method="post">
+            <input id="m" autocomplete="off" /><button>Send</button>
+        </form>-->
 
     <div class='col-1 opf' id='op2'>
         Op1
     </div>
 </div>
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"> var myhead ="sper sa fie bine";</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script > var myhead ="sper sa fie bine";</script>
-<script src="../JS/ChatTemplateHandler.js">
-
-
-</script>
+<script>var user = '<%= user.username%>'</script>
+<script src="../JS/ChatTemplateHandler.js"></script>
 </body>
 </html>

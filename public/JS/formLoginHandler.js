@@ -9,15 +9,14 @@ exports.form = function (req,res){
     req.checkBody('password','Must insert a password!').notEmpty();
     var errors = req.validationErrors();
     console.log(errors);
-
     //destroy cookie
     if (errors)
         res.render('./log.ejs',{error: errors});
     else {
-
         database.findUser(req.body.userName, req.body.password, function (found , user) {
             if(found){
                 req.session.user = user;
+
 
                 res.cookie('user', user.username);
                 res.render('./chatTemplate.ejs', {user: user});
@@ -30,6 +29,7 @@ exports.form = function (req,res){
                 ];
                 console.log(error[0].msg);
                 console.log(error.length);
+                //console.log("fuck meme");
                 res.render('./log.ejs', {error: error});
 
             }

@@ -18,6 +18,8 @@
     "popups": "latest",
     "serve-favicon": "~2.4.5",
     "socket.io": "^1.7.4",
-    "client-sessions": "latest"
+    "client-sessions": "latest",
+    "hashmap": "latest",
+    "delivery": "latest"
   }
 }

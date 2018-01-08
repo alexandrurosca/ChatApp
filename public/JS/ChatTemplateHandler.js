@@ -3,22 +3,16 @@
 // var cookieParser = require('./cookieHandler');
 var username;
 var socket;
-
-$.getScript('JS/cookieHandler.js', function() {
-     username = getCookie("user");
-     console.log(username);
-     socket.emit('friendsList',username);
-});
+var lastIndexOfFriend;
 
 $(document).ready(function(){
-       //  $('#chat').load("./chat");
-    console.log(window.myhead);
-           });
+    socket = io();
+    username = window.user;
+    socket.emit('friendsList',username);
+    console.log("Here");
+});
 
 $(function () {
-    var openedRoom;
-    socket = io();
-
     $('#chat').submit(function(){
         var data = {name:username, msg: $('#m').val(), room: openedRoom };
         socket.emit('chat message', data);
@@ -27,17 +21,33 @@ $(function () {
     });
 
 
-    $('#addFriends').submit(function () {
+    $('#addFriends1').submit(function () {
         var friendName =$('#nameFriendInput').val();
-
+        console.log("Here I am", friendName);
         socket.emit('add friend', username, friendName );
-        socket.on('confirm add friend', function (data) {
-            alert(data);
-        })
+    });
+
+    socket.on('confirm add friend', function (data, modified, friendName) {
+        alert(data);
+        if(modified){
+            var friend = $("<div class=\"row friend\" id="+ lastIndexOfFriend +" ></div>").text(friendName);
+            $('#friendsList').append(friend);
+            lastIndexOfFriend+=1;
+            //TODO: action listener for the new friend
+        }
+
     })
+
+    socket.on('request add friend', function (friend) {
+        var confirmAccept = confirm(friend + ' wants to add you!');
+        console.log("Confirm accept: ", confirmAccept);
+        socket.emit('confirm add friend1', confirmAccept);
+    });
 
    // socket.emit('existOpenedRooms',username);
     socket.on('friendsList',function (friends) {
+        socket.emit('user login', username);
+        lastIndexOfFriend = friends.length;
         var friendsList = document.getElementById('friendsList');
         try{
 
@@ -53,7 +63,8 @@ $(function () {
 
                      socket.emit('createConversation',username,this.innerText);
 
-                     try {var openedConversation = document.getElementById(username+this.innerText).innerText;
+                     try {
+                         var openedConversation = document.getElementById(username+this.innerText).innerText;
                      }
                      catch(err) {
                          var openedConversations = document.getElementById('conversations');
@@ -78,27 +89,51 @@ $(function () {
             friendsList.innerHTML += "<div class=\"row friend\" id=" + i + ">No friends:( </div>";
             //console.log(err.message);
         }
+
     });
+
+
+
 
     socket.on('createConversation',function (room) {
         $('#chat').load("./chat");
     });
 
-    socket.on('connectToRoom',function (friend,thisUsername) {
+    socket.on('connectToRoom',function (friend, thisUsername) {
       //  console.log('client part '+ friend);
         console.log(thisUsername);
         if (thisUsername==username)
-                socket.emit('connectToRoom',friend+thisUsername);
+                socket.emit('connectToRoom',friend + thisUsername);
     });
+
+    //images
+
+    /*socket.on('connect', function(){
+        var delivery = new Delivery(socket);
+
+        delivery.on('receive.start',function(fileUID){
+            console.log('receiving a file!');
+        });
+
+        delivery.on('receive.success',function(file){
+            var params = file.params;
+            if (file.isImage()) {
+                $('img').attr('src', file.dataURL());
+            };
+        });
+    });
+    */
+
+
 });
 
 
-    $('#add').submit(function(){
-       var nameFriend = document.getElementById('nameFriend');
-       document.alert(nameFriend);
-}
+//     $('#add').submit(function(){
+//        var nameFriend = document.getElementById('nameFriend');
+//        document.alert(nameFriend);
+// });
 
-);
+
 
 
 

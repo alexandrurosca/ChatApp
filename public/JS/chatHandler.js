@@ -1,7 +1,6 @@
 
 $(function () {
     var socket = io();
-    var username = getCookie("user");
 
 
     socket.on('chat message', function(msg){

@@ -8,6 +8,10 @@ var app = require('../app');
 var debug = require('debug')('untitled:server');
 var http = require('http');
 var database = require('../public/databaseMongo/db');
+var HashMap = require('hashmap');
+var fs = require("fs");
+var path = require("express");
+
 
 /**
  * Get port from environment and store in Express.
@@ -90,70 +94,120 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 var io = require('socket.io')(server);
+var usersConnected = new HashMap();
+var dl  = require('delivery');
 
 var Rooms;
 var waitforit;
-io.on('connection', function(socket){
-    console.log(Object.keys(io.sockets.adapter.rooms)[0]);
+var friendName, userName ;
+io.on('connection', function(socket) {
+    //images
+    /*
+    var delivery = dl.listen(socket);
+    delivery.on('delivery.connect', function (delivery) {
 
-    socket.on('friendsList',function (username) {
-        database.findFriends(username,function (result) {
-            console.log("List of friends:", result);
-            socket.emit('friendsList',result);
+        delivery.send({
+            name: 'hope.jpg',
+            path: './images/hope.jpg',
+            params: {foo: 'bar'}
+        });
+
+        delivery.on('send.success', function (file) {
+            console.log('File successfully sent to client!');
         });
     });
+    */
+        console.log(Object.keys(io.sockets.adapter.rooms)[0]);
 
-    socket.on('chat message', function(msg){
-        io.to(msg.room).emit('chat message', msg);
-        console.log(msg.room);
-    });
+        socket.on('friendsList', function (username) {
+            database.findFriends(username, function (result) {
+                console.log("List of friends:", result);
+                socket.emit('friendsList', result);
+            });
+        });
 
-    socket.on('disconnect',function(){
-        io.emit('system msg',socket.id + " is disconnected");
-    });
+        socket.on('chat message', function (msg) {
+            io.to(msg.room).emit('chat message', msg);
+            console.log(msg.room);
+        });
 
-    socket.on('user LogIn',function(UserName){
-        console.log(UserName + " is connected")
-
-        io.emit('system msg',UserName + " is connected");
-        io.emit('UserName',UserName);
-    });
-
-    socket.on('add friend', function (username, friend) {
-        console.log("username: " + username + " friend: " + friend);
-        database.addFriend(username, friend, function (modified) {
-            var message;
-            if(modified){
-                message = friend + " has been added in your friend list";
-            }else{
-                message = friend + " has not been added in your friend list";
-            }
-          socket.emit('confirm add friend', message);
+        socket.on('disconnect', function () {
+            io.emit('system msg', usersConnected.get(socket.id) + " is disconnected");
+            usersConnected.delete(socket.id);
         })
+        socket.on('user login', function (username) {
+            console.log(username + " is connected");
+            usersConnected.set(socket.id, username);
+            //io.emit('system msg',UserName + " is connected");
+        });
+
+        socket.on('add friend', function (username, friend) {
+            //set global username and friend for "socket.on ('confirm add friend1')"
+            setNames(username, friend);
+            //socket.emit('request add friend', username);
+            console.log("Send to: ",friend, "  : ", usersConnected.search(friend)  );
+            io.to(usersConnected.search(friend)).emit('request add friend', username);
+
+        });
+
+        socket.on('confirm add friend1', function (confirmAccept) {
+        console.log("Console from www: ", confirmAccept);
+        var message;
+        var message1;
+        if(confirmAccept) {
+            //add  friend in your list
+            console.log("User: ", userName, " Friend: ", friendName);
+            database.addFriend(userName, friendName, function (modified) {
+                if (modified) {
+                    message = friendName + " has been added in your friend list";
+                } else {
+                    message = friendName + " has not been added in your friend list";
+                }
+                console.log("Message1:" + message);
+                //socket.emit('confirm add friend', message);
+
+                io.to(usersConnected.search(userName)).emit('confirm add friend', message, modified, friendName);
+
+            });
+            //add you in friend's list
+            database.addFriend(friendName, userName, function (modified) {
+                if (modified) {
+                    message1 = userName + " has been added in your friend list";
+                } else {
+                    message1 = userName + " has not been added in your friend list";
+                }
+                console.log("Message2:" + message1);
+                io.to(usersConnected.search(friendName)).emit('confirm add friend', message1, modified, userName);
+            })
+        }else{
+
+            message = friendName + " didn't accept your request!";
+            io.to(usersConnected.search(userName)).emit('confirm add friend', message, false, " ");
+
+        }
+
+
+     });
+
+
+        socket.on('createConversation', function (username, friendUsername) {
+            console.log("connect room :" + username + friendUsername);
+            socket.join(username + friendUsername);
+            socket.emit('createConversation', username + friendUsername);
+            //io.emit('connectToRoom', username, friendUsername);
+            io.to(usersConnected.search(username)).emit('connectToRoom', username, friendUsername);
+            io.to(usersConnected.search(friendUsername)).emit('connectToRoom', username, friendUsername);
+        });
+
+        socket.on('connectToRoom', function (room) {
+            console.log("user2connect");
+            socket.join(room);
+            socket.emit('createConversation', room);
+        });
+
     });
 
-    socket.on('createConversation',function(username,friendUsername){
-        console.log("connect room :" + username +friendUsername);
-        socket.join(username+friendUsername);
-        socket.emit('createConversation',username+friendUsername);
-        io.emit('connectToRoom',username,friendUsername);
-    });
-
-    socket.on('connectToRoom',function (room) {
-        console.log("user2connect");
-        socket.join(room);
-        socket.emit('createConversation',room);
-    });
-
-});
-
-function existOpenedRooms(username) {
-        username== waitforit;
-//        socket.join()
-};
-
-function  connectToRoom(room) {
-    console.log("user2connect");
-    socket.join(room);
-    socket.emit('createConversation');
+function setNames(user, friend) {
+    friendName = friend;
+    userName = user;
 }

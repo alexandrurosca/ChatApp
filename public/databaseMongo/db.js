@@ -88,16 +88,30 @@ exports.findFriends= function(username, callback ){
     });
 }
 exports.addFriend = function (username,friend, callback) {
-    var modified = false;
+    var modified;
+    var foundUser;
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
-        db.collection("users").updateOne({username: username},{$addToSet: {friends: friend}},function (err, res) {
+        var query = { username: friend };
+        db.collection("users").find(query).toArray(function (err, result) {
             if (err) throw err;
-            modified = ((res.result.nModified == 0) ? false : true);
-            db.close();
-            callback(modified);
-        })
+            foundUser = ((result.length != 0) ? true : false);
+            //console.log("FoundUser: ", foundUser , "Result: ", result);
+            if(foundUser){
+                db.collection("users").updateOne({username: username},{$addToSet: {friends: friend}},function (err, res) {
+                    if (err) throw err;
+                    modified = ((res.result.nModified == 0) ? false : true);
+                    db.close();
+                    callback(modified);
+                 });
+            }else{
+                db.close();
+                callback(false);
+            }
+
+        });
     });
+
 }
 exports.deleteFriend = function (username, friend, callback) {
 
