@@ -20,6 +20,7 @@
     "socket.io": "^1.7.4",
     "client-sessions": "latest",
     "hashmap": "latest",
-    "delivery": "latest"
+    "delivery": "latest",
+    "dateformat": "latest"
   }
 }

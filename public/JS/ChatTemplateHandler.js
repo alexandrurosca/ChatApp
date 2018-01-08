@@ -4,6 +4,7 @@
 var username;
 var socket;
 var lastIndexOfFriend;
+var openedRoom;
 
 $(document).ready(function(){
     socket = io();
@@ -62,7 +63,7 @@ $(function () {
                      console.log( this.innerText);
 
                      socket.emit('createConversation',username,this.innerText);
-
+                    /*
                      try {
                          var openedConversation = document.getElementById(username+this.innerText).innerText;
                      }
@@ -82,6 +83,7 @@ $(function () {
 
 
                      }
+                     */
                      });
             }
         }
@@ -96,11 +98,12 @@ $(function () {
 
 
     socket.on('createConversation',function (room) {
+        openedRoom = room;
         $('#chat').load("./chat");
     });
 
     socket.on('connectToRoom',function (room) {
-                socket.emit('connectToRoom',room);
+        socket.emit('connectToRoom',room);
     });
 
     //images

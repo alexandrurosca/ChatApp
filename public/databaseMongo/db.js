@@ -1,7 +1,34 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/mydb";
 
+//conversation
+exports.addConversation = function (obj, callback) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        db.collection("conversation").insertOne(obj, function (err, res) {
+            if (err) throw err;
+            db.close();
+            callback();
+        });
+    });
+}
+exports.findConversationsByRoom = function(room, callback ){
+    var foundConversation = false;
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var query = { room: room};
+        db.collection("conversation").find(query,{ _id: false, room: false}).toArray(function(err, result) {
+            if (err) throw err;
+            foundConversation = ((result.length != 0) ? true : false);
+            //console.log(result);
+            db.close();
+            callback(foundConversation, result);
+        });
+    });
+}
 
+
+//users
 exports.addUser = function (obj, callback) {
 
     MongoClient.connect(url, function (err, db) {
