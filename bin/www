@@ -97,7 +97,7 @@ var io = require('socket.io')(server);
 var usersConnected = new HashMap();
 var dl  = require('delivery');
 
-var Rooms;
+var roomId;
 var waitforit;
 var friendName, userName ;
 io.on('connection', function(socket) {
@@ -191,12 +191,19 @@ io.on('connection', function(socket) {
 
 
         socket.on('createConversation', function (username, friendUsername) {
-            console.log("connect room :" + username + friendUsername);
-            socket.join(username + friendUsername);
-            socket.emit('createConversation', username + friendUsername);
+
+            var room ;
+            if (username < friendUsername)
+                room = username + friendUsername;
+            else
+                room = friendUsername + username;
+            console.log("connect room :" + room);
+            socket.join(room);
+            socket.emit('createConversation', room);
+            //TODO
             //io.emit('connectToRoom', username, friendUsername);
-            io.to(usersConnected.search(username)).emit('connectToRoom', username, friendUsername);
-            io.to(usersConnected.search(friendUsername)).emit('connectToRoom', username, friendUsername);
+            //io.to(usersConnected.search(username)).emit('connectToRoom', username, friendUsername);
+            io.to(usersConnected.search(friendUsername)).emit('connectToRoom',room);
         });
 
         socket.on('connectToRoom', function (room) {

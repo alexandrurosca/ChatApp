@@ -99,11 +99,8 @@ $(function () {
         $('#chat').load("./chat");
     });
 
-    socket.on('connectToRoom',function (friend, thisUsername) {
-      //  console.log('client part '+ friend);
-        console.log(thisUsername);
-        if (thisUsername==username)
-                socket.emit('connectToRoom',friend + thisUsername);
+    socket.on('connectToRoom',function (room) {
+                socket.emit('connectToRoom',room);
     });
 
     //images

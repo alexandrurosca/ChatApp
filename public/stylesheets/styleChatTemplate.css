@@ -99,3 +99,7 @@ div[id='msg']{
     padding: 10px 20px 10px 20px;
     }
 
+.partialChat{
+    border: 2px;
+    padding: 0;
+}
