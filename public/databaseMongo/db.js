@@ -202,6 +202,17 @@ exports.uploadPhoto = function (newItem, callback) {
     });
 }
 
+exports.findPhoto= function(username, callback ){
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        db.collection("yourcollectionname").findOne({}, function(err, result) {
+            if (err) throw err;
+            db.close();
+            callback(result);
+        });
+    });
+};
+
 /*
 * var nameSchema = new mongoose.Schema({
   firstName: String,

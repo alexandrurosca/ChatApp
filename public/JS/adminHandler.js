@@ -1,9 +1,11 @@
 var socket;
 
 
+
 $(document).ready(function(){
     socket = io();
     socket.emit('usersList');
+    socket.emit('findImage');
 });
 
 
@@ -19,4 +21,18 @@ $(function () {
         //TODO: add action listener to users
 
     })
+
+    socket.on('uploadProfile', function (source) {
+
+      //  var img = new DataView(source);
+        console.log("source:", source);
+
+        var src = "data:image/jpeg;base64," + source.toString()('ascii');
+
+
+        document.getElementById('profilePicture').setAttribute('src', src);
+
+
+    })
+
 });
