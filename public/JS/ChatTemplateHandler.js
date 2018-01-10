@@ -15,19 +15,40 @@ $(document).ready(function(){
 
 
 // add listener : change room + reload chat
-function addListenerForConversationButton() {
-    var conversations = document.getElementsByClassName('change');
+function addListenerForOpenConversationButton() {
+    var conversations = document.getElementsByClassName('openConv');
 
     for (var i = 0; i < conversations.length; i++)
         conversations[i].addEventListener('click',function(){
 
             openedRoom = this.id;
             $('#chat').load("./chat");
-            console.log("am dat click pe conversatia" + this.id);
+            console.log("am deschis conversatia " + this.id);
+
+        });
+}
+
+
+
+function addListenerForCloseConversationButton() {
+    var conversations = document.getElementsByClassName('closeConv');
+
+    for (var i = 0; i < conversations.length; i++)
+        conversations[i].addEventListener('click',function(){
+
+
+            var parent = document.getElementById("conversations");
+            var child = document.getElementById(this.id + "buttons");
+            parent.removeChild(child);
+            openedRoom = "";
+
+                document.getElementById('chat').innerHTML= "";
+            console.log("am inchis conversatia " + this.id);
 
         });
 }
 $(function () {
+    document.getElementById('infoUser').innerText=username;
     $('#chat').submit(function(){
         var data = {name:username, msg: $('#m').val(), room: openedRoom };
         socket.emit('chat message', data);
@@ -51,7 +72,7 @@ $(function () {
         }
 
     });
-
+   // $('#chat').load("./chat");
     socket.on('request add friend', function (friend) {
         var confirmAccept = confirm(friend + ' wants to add you!');
         console.log("Confirm accept: ", confirmAccept);
@@ -120,10 +141,23 @@ $(function () {
         catch(err) {
             var openedConversations = document.getElementById('conversations');
             openedConversations.innerHTML +=
-                "<div class=\"col-2 conversationFriend\" > <input id=" +room +
-                " class='change' type=\"button\" value=" + name+ "></div>";
+                "<div class=\"col-2 conversationFriend dropdown\" id=" + room + "buttons ><input id=" + room +"button "+
+                " class='change dropbtn' onclick=\"myFunction()\" type=\"button\" value=" + name+ ">" +
+                "<div id=\"myDropdown\" class=\" col-2 myDropdown dropdown-content\">\n" +
+                "<input  class=\"change openConv\" id=" + room + " type=\"button\" value=\"Deschide\">\n" +
+                "<input  class=\"change closeConv\" id=" + room + " type=\"button\" value=\"Inchide\">\n" +
+                "</div></div>";
+               /* "<div class=\"col-2 conversationFriend\" > <input id=" +room +
+                " class='change' type=\"button\" value=" + name+ "></div>";*/
+            /*"<div class=\"col-2 conversationFriend\" > <input id=" +room +
+            " class='change' type=\"button\" value=" + name+
+            "> <div id='exit'><input id="+ room +"x  class='exit' type='button' value='x' ></div></div>"*/
+
+
             openedRoom = room;
-            addListenerForConversationButton();
+            addListenerForOpenConversationButton();
+            addListenerForCloseConversationButton();
+            addListenerForDrop();
             /*var conversation = document.getElementById(room);
             console.log(conversation.id);
             conversation.addEventListener('click',function(){
@@ -166,7 +200,44 @@ $(function () {
 //        document.alert(nameFriend);
 // });
 
+// When the user clicks on div, open the popup
 
 
+function myFunction() {
+  //  document.getElementById("myDropdown").classList.toggle("show");
+    var meniu = document.getElementsByClassName("myDropdown");
 
+    for (var i = 0; i < meniu.length; i++){
+       meniu[i].classList.toggle("show");
+        }
 
+}
+
+// Close the dropdown if the user clicks outside of it
+
+function addListenerForDrop (){
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].addEventListener('click',function () {
+           // console.log("DropMeniuShowed"+ this.id);
+            if (this.classList.contains('show')) {
+                this.classList.remove('show');
+            }
+        })
+}}
+/*
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+*/

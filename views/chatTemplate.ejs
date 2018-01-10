@@ -13,6 +13,7 @@
 
         <div class="col-2 button" >
             <input class='change' id= 'account' name="account" type="button" value="Account">
+
         </div>
         <div class="col-2 button" >
             <input  class='change' id= 'logOut' name="logOut" type="button" value="Log Out">
@@ -20,15 +21,19 @@
     </div>
 
     <div class="col-9" id='user'>
-        <div class="col-2" id='infoUser'>
+        <div class='col-3 opf' id='op1'>
+            <form id='addFriends1' >
+                <input id="nameFriendInput" autocomplete="off" /><br>
+                <input  class="change friendListOp" id='addFriendButton' type="button" value="Adauga prieten">
+                <input  class="change friendListOp" id='deleteFriendButton' type="button" value="Sterge prieten">
+            </form>
         </div>
-        <div class="col-2" id='infoUser'>
+        <div class="col-2" >
         </div>
         <div class="col-2" id='pozaUser'>
             <img src="https://memegenerator.net/img/images/600x600/11113968/roger-american-dad.jpg" style="max-width:100%;height:auto;"/>
         </div>
-        <div class="col-2" id='infoUser'>
-            <%= user.username%><br>
+        <div class="col-3" id='infoUser'>
         </div>
     </div>
 
@@ -42,31 +47,33 @@
 
     <div class="col-1" id='options'>
         <div class="row" id='option1'>
-            Option1
+            <input  class="change " id='addFriendButton' type="button" value="Trimite poza">
         </div>
-        <div class="row" id='option2'>
-            Option2
+
         </div>
     </div>
 </div>
-<div class="col-3" id='optionsFriends'>
-    <div class='col-3 opf' id='op1'>
-        <form id='addFriends1' >
-            <input   id= 'addFriendButton' type="button" value="Add">
-           <input id="nameFriendInput" autocomplete="off" />
-        </form>
-    </div>
-    <!-- <form id='chat' action="" method="post">
-            <input id="m" autocomplete="off" /><button>Send</button>
-        </form>-->
+ <div class="col-3" id='optionsFriends'>
+     <!--   <div class='col-3 opf' id='op1'>
+            <form id='addFriends1' >
+                <input   id= 'addFriendButton' type="button" value="Add">
+               <input id="nameFriendInput" autocomplete="off" />
+            </form>
+        </div>
+        <!-- <form id='chat' action="" method="post">
+                <input id="m" autocomplete="off" /><button>Send</button>
+            </form>-->
 
-    <div class='col-1 opf' id='op2'>
+    <!--<div class='col-1 opf' id='op2'>
         Op1
-    </div>
+    </div>-->
 </div>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>var user = '<%= user.username%>'</script>
+<script>var user = '<%= user.username%>' </script>
 <script src="../JS/ChatTemplateHandler.js"></script>
+<script>
+
+</script>
 </body>
 </html>

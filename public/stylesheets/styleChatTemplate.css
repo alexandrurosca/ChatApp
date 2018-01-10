@@ -1,7 +1,10 @@
 * {
     box-sizing: border-box;
-    //border: solid 1px;
+   // border: solid 1px;
+     margin: 0;
+    padding: 0;
 }
+body { font: 13px Helvetica, Arial; }
 .row::after {
     content: "";
     clear: both;
@@ -30,6 +33,7 @@ html {
     height: 90vh;
     border:solid 2px;
     border-color:#F26101;
+    overflow: auto;
 }
 
 .friend{
@@ -61,9 +65,11 @@ html {
     float: left;
 }
 .conversation{
-    padding:5% 0% 0%;
+    padding:0% 0% 0% 0%;
     border-bottom:solid 1px;
-    border-color:#F26101;}
+    border-color:#F26101;
+    min-height: 4vh;}
+
 img {
     border-radius: 50%;
     border:solid 1px;
@@ -82,6 +88,7 @@ div[id='chat']{
     height: 50vh;
     position: relative;
     padding: 0;
+    border: 1px;
 }
 div[id='msg']{
     height: 45vh;
@@ -92,7 +99,7 @@ div[id='msg']{
 
 }
 div[id='options']{
-   padding: 0% 0% 1% 0%
+   padding: 0% 0% 0.5% 0%
 
 }
 .displayFriend{
@@ -106,4 +113,102 @@ div[id='options']{
 .partialChat{
     border: 2px;
     padding: 0;
+}
+.opf{
+
+}
+form input[id='nameFriendInput'] {
+    width: 70%;
+ //   float: right;
+}
+.friendListOp {
+    width : 70%;
+  //  float: right;
+}
+.exit {
+    padding :0%;
+    margin :0%;
+    width: 5%;
+    height: 1%;
+    background-color: #F26101;
+    border:none;
+    font: 4px Helvetica, Arial;
+    border-radius: 50px;
+}
+div[id='exit']{visibility: hidden}
+.change:hover +div[id='exit'] {
+    visibility: visible;
+}
+div[id='exit']:hover{visibility: visible;}
+
+/*.dropbtn {
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}*/
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 2vh;
+    left: 1vw;
+    min-width: 160px;
+   /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    z-index: 1;
+    background-color: transparent;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
 }

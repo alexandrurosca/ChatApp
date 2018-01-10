@@ -3,12 +3,12 @@
 <head>
     <title>Socket.IO chat</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font: 13px Helvetica, Arial; }
-        form[id=chat] {  border: 1px; background: #F26101; padding: 0px;  bottom: 0; width: 100%; position: absolute; left: 0; height: 10%;}
-        form input { border: 0; padding: 10px; width: 90%;
+
+
+        form[id='chat'] {  border: 1px; background: #F26101; padding: 0px;  bottom: 0; width: 100%; position: absolute; left: 0; height: 10%;}
+        form input[id='m'] { border: 0; padding: 10px; width: 90%;
             margin-right: .5%; background:#F26101; height: 10%;}
-        form button { width: 9%; background: white; border: 1px; padding: 0px; border-radius: 50px; height: 90%;
+        form button[id='chatB'] { width: 9%; background: white; border: 1px; padding: 0px; border-radius: 50px; height: 90%;
         }
         #messages { list-style-type: none; margin: 0; padding: 0; }
         #messages li { padding: 5px 10px; text-overflow: ellipsis;}
@@ -22,7 +22,7 @@
     <ul id="messages"></ul>
 </div>
 <form id='chat' action="" method="post">
-    <input id="m" autocomplete="off" /><button>Send</button>
+    <input id="m" autocomplete="off" /><button id='chatB' >Send</button>
 </form>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
