@@ -103,7 +103,7 @@ var waitforit;
 var friendName, userName ;
 io.on('connection', function(socket) {
     //images
-    /*
+
     var delivery = dl.listen(socket);
     delivery.on('delivery.connect', function (delivery) {
 
@@ -117,12 +117,12 @@ io.on('connection', function(socket) {
             console.log('File successfully sent to client!');
         });
     });
-    */
+
         console.log(Object.keys(io.sockets.adapter.rooms)[0]);
 
         socket.on('friendsList', function (username) {
             database.findFriends(username, function (result) {
-                console.log("List of friends:", result);
+                //console.log("List of friends:", result);
                 socket.emit('friendsList', result);
             });
         });
@@ -217,20 +217,37 @@ io.on('connection', function(socket) {
             socket.join(room);
             socket.emit('openChat', room,friendUsername);
             //TODO
-            //io.emit('connectToRoom', username, friendUsername);
-            //io.to(usersConnected.search(username)).emit('connectToRoom', username, friendUsername);
             io.to(usersConnected.search(friendUsername)).emit('connectToRoom',room);
-            io.to(usersConnected.search(friendUsername)).emit('openChat',room,username)
+            io.to(usersConnected.search(friendUsername)).emit('openChat',room,username);
+            //search for conversation
+            setTimeout(function(){
+                database.findConversationsByRoom(room, function (modified, result) {
+                    //console.log(result);
+                    if(modified){
+                        io.to(usersConnected.search(username)).emit('system msg', result);
+                        io.to(usersConnected.search(friendUsername)).emit('system msg', result);
+                    }
+                })
+            }, 500);
+
         });
 
         socket.on('connectToRoom', function (room) {
             console.log("user2connect");
             socket.join(room);
+
             //socket.emit('openChat', room);
         });
 
 
-        //opened rooms
+        //admin
+        socket.on('usersList', function () {
+            database.findAllUsers(function (result) {
+               // console.log(JSON.stringify(result));
+                socket.emit('usersList', result);
+            })
+
+        })
 
 
     });

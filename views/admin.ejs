@@ -1,0 +1,81 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">
+</head>
+<body>
+
+<div class="col-3 friendList" id="friendsList">
+</div>
+
+<div class="row">
+    <div class="col-9 buttons" id='options'>
+
+        <div class="col-2 button" >
+            <input class='change' id= 'account' name="account" type="button" value="Account">
+        </div>
+        <div class="col-2 button" >
+            <input  class='change' id= 'logOut' name="logOut" type="button" value="Log Out">
+        </div>
+    </div>
+
+    <div class="col-9" id='user'>
+        <div class="col-2" id='infoUser'>
+        </div>
+        <div class="col-2" id='infoUser'>
+        </div>
+        <div class="col-2" id='pozaUser'>
+            <img src="https://memegenerator.net/img/images/600x600/11113968/roger-american-dad.jpg" style="max-width:100%;height:auto;"/>
+        </div>
+        <div class="col-2" id='infoUser'>
+            admin
+        </div>
+    </div>
+
+    <div class="col-9 conversation" id= 'conversations'>
+
+    </div>
+
+    <div class="col-8" id='chat'>
+
+    </div>
+
+    <div class="col-1" id='options'>
+        <div class="row" id='option1'>
+            Option1
+        </div>
+        <div class="row" id='option2'>
+            Option2
+        </div>
+    </div>
+</div>
+<div class="col-3" id='optionsFriends'>
+    <div class='col-3 opf' id='op1'>
+        <form id='addFriends1' >
+            <input   id= 'addFriendButton' type="button" value="Add">
+            <input id="nameFriendInput" autocomplete="off" />
+        </form>
+    </div>
+
+    <form action="/admin/uploadPicture" method="POST" enctype="multipart/form-data">
+        <input type="file" name="picture" accept="application/x-zip-compressed,image/*">
+
+        <input class="form-control" type="text" name="description" placeholder="Description or Message">
+
+        <input class="btn btn-primary" type="submit" value="submit">
+    </form>
+    <!-- <form id='chat' action="" method="post">
+            <input id="m" autocomplete="off" /><button>Send</button>
+        </form>-->
+
+    <div class='col-1 opf' id='op2'>
+        Op1
+    </div>
+</div>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+
+<script src="../JS/adminHandler.js"></script>
+</body>
+</html>

@@ -15,13 +15,19 @@ exports.form = function (req,res){
     else {
         database.findUser(req.body.userName, req.body.password, function (found , user) {
             if(found){
-                req.session.user = user;
+                //admin
+                if(req.body.userName == "alex" && req.body.password == 123){
+                    res.redirect("http://localhost:3000/admin");
+                    //res.render('./admin.ejs');
+                }else {
 
 
-                res.cookie('user', user.username);
-               // res.render('./chatTemplate.ejs', {user: user});
-                res.redirect("http://localhost:3000/chatTemplate")
-                console.log("You can go on chat page!");
+                    req.session.user = user;
+                    res.cookie('user', user.username);
+                    // res.render('./chatTemplate.ejs', {user: user});
+                    res.redirect("http://localhost:3000/chatTemplate")
+                    console.log("You can go on chat page!");
+                }
             }else{
                 console.log("Your username / password is incorrect!");
                 var error =[

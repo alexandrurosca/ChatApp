@@ -1,5 +1,6 @@
 //var express = require('express');
 var database = require('../databaseMongo/db.js');
+var mail = require('../mail/mail.js');
 
 exports.form = function (req,res){
 
@@ -40,6 +41,7 @@ exports.form = function (req,res){
                 res.render('./createAccount.ejs', {error: ""});
 
             } else {database.addUser(user, function () {
+                //mail.sendMail();
                 res.redirect("http://localhost:3000/");
             });}
         });

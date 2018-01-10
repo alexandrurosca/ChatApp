@@ -58,7 +58,6 @@ $(function () {
     //add listener for addFriend
     document.getElementById('addFriendButton').addEventListener('click',function () {
         var friendName =$('#nameFriendInput').val();
-        console.log("Here I am", friendName);
         socket.emit('add friend', username, friendName ); })
 
 
@@ -174,8 +173,8 @@ $(function () {
     });
 
     //images
-
-    /*socket.on('connect', function(){
+    /*
+    socket.on('connect', function(){
         var delivery = new Delivery(socket);
 
         delivery.on('receive.start',function(fileUID){
@@ -183,22 +182,18 @@ $(function () {
         });
 
         delivery.on('receive.success',function(file){
-            var params = file.params;
             if (file.isImage()) {
                 $('img').attr('src', file.dataURL());
             };
         });
     });
+
     */
 
 
 });
 
 
-//     $('#add').submit(function(){
-//        var nameFriend = document.getElementById('nameFriend');
-//        document.alert(nameFriend);
-// });
 
 // When the user clicks on div, open the popup
 
