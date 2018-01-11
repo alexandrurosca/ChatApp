@@ -3,7 +3,6 @@
 // var cookieParser = require('./cookieHandler');
 var username;
 var socket;
-var lastIndexOfFriend;
 var openedRoom;
 
 $(document).ready(function(){
@@ -12,19 +11,18 @@ $(document).ready(function(){
     socket.emit('friendsList',username);
    // console.log("Here");
     addListenerLogOut();
-
     socket.emit('logout',username);
     socket.emit('profilePicture', username);
     console.log("Here");
+    setTimeout(onlineOffline, 200);
 });
 
-
-
+//listener logout
 function addListenerLogOut(){
     document.getElementById('logOut').addEventListener('click',
-        function () {
-            location.replace("http://localhost:3000");
-        });
+    function () {
+        location.replace("http://localhost:3000");
+    });
 }
 
 // add listener : change room + reload chat
@@ -73,6 +71,14 @@ function addListenerForCloseConversationButton() {
         });
 }
 
+function onlineOffline() {
+    var friends = document.getElementsByClassName('friend');
+
+    for (var i = 0; i < friends.length; i++) {
+        console.log(friends[i].innerText);
+        socket.emit('checkOnline', friends[i].innerText);
+    }
+}
 $(function () {
     document.getElementById('infoUser').innerText=username;
     $('#chat').submit(function(){
@@ -95,9 +101,9 @@ $(function () {
     socket.on('confirm add friend', function (data, modified, friendName) {
         alert(data);
         if(modified){
-            var friend = $("<div class=\"row friend\" id="+ lastIndexOfFriend +" ></div>").text(friendName);
+            var friend = $("<div class=\"row friend\" id="+ friendName +" ></div>").text(friendName);
             $('#friendsList').append(friend);
-            lastIndexOfFriend+=1;
+            //lastIndexOfFriend+=1;
            addListenerFriend()
         }
 
@@ -114,13 +120,13 @@ $(function () {
 
     socket.on('friendsList',function (friends) {
         socket.emit('user login', username);
-        lastIndexOfFriend = friends.length;
+       // lastIndexOfFriend = friends.length;
         var friendsList = document.getElementById('friendsList');
         friendsList.innerHTML="";
         try{
 
             for(var  i = 0;i<friends.length;i++) {
-                friendsList.innerHTML += "<div class=\"row friend\" id=" + i + ">" + friends[i] + "</div>";
+                friendsList.innerHTML += "<div class=\"row friend\" id=" + friends[i] + ">" + friends[i] + "</div>";
             }
             addListenerFriend();
             /*for(var  i = 0;i<friends.length;i++) {
@@ -180,7 +186,16 @@ $(function () {
         document.getElementById('profilePicture').setAttribute('src', src);
     })
 
+    //online / offline
 
+    socket.on('checkOnlineResponse', function (user, online) {
+        var div = document.getElementById(user);
+        if(online){
+            div.style.backgroundColor = '#708F2F';
+        }else{
+            div.style.backgroundColor = '#78331E';
+        }
+    })
 
 
 });
@@ -198,10 +213,10 @@ function myFunction() {
 
 }
 
-function addListenerForDrop (){
+function addListenerForDrop () {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     for (var i = 0; i < dropdowns.length; i++) {
-        dropdowns[i].addEventListener('click',function () {
+        dropdowns[i].addEventListener('click', function () {
             // console.log("DropMeniuShowed"+ this.id);
             if (this.classList.contains('show')) {
                 this.classList.remove('show');

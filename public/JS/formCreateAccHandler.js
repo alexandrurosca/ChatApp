@@ -43,16 +43,27 @@ exports.form = function (req,res){
             friends: ["x"],
             img: Buffer(encImg, 'base64')
         };
-        database.findUsername(user.username, function (result) {
-            if(result){
-                console.log("Username already taken");
-                res.render('./createAccount.ejs', {error: ""});
 
-            } else {database.addUser(user, function () {
-                //mail.sendMail();
-                res.redirect("http://localhost:3000/");
-            });}
-        });
+        database.checkCNP(user.name,user.lastName, user.CNP, function (realPerson) {
+            //TODO: hard codat, nu sterge
+            if(1){
+                database.findUsername(user.username, function (result) {
+                    if(result){
+                        console.log("Username already taken");
+                        res.render('./createAccount.ejs', {error: "Username already taken"});
+
+                    } else {database.addUser(user, function () {
+                        //mail.sendMail();
+                        res.redirect("http://localhost:3000/");
+                    });}
+                });
+            }else{
+                console.log("No real Person");
+                res.render('./createAccount.ejs', {error: "No real person"});
+            }
+        })
+
+
 
 
     }

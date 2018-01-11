@@ -96,33 +96,19 @@ function onListening() {
 }
 var io = require('socket.io')(server);
 var usersConnected = new HashMap();
-var dl  = require('delivery');
 
 var roomId;
 var waitforit;
 var friendName, userName ;
 io.on('connection', function(socket) {
-    //images
 
-    var delivery = dl.listen(socket);
-    delivery.on('delivery.connect', function (delivery) {
 
-        delivery.send({
-            name: 'hope.jpg',
-            path: './images/hope.jpg',
-            params: {foo: 'bar'}
-        });
-
-        delivery.on('send.success', function (file) {
-            console.log('File successfully sent to client!');
-        });
-    });
 
         console.log(Object.keys(io.sockets.adapter.rooms)[0]);
 
         socket.on('friendsList', function (username) {
             database.findFriends(username, function (result) {
-                console.log("List of friends:", result);
+                //console.log("List of friends:", result);
                 socket.emit('friendsList', result);
             });
 
@@ -145,11 +131,12 @@ io.on('connection', function(socket) {
         });
 
         socket.on('disconnect', function () {
-            io.emit('system msg', usersConnected.get(socket.id) + " is disconnected");
+            console.log("user: ", usersConnected.get(socket.id));
+            socket.broadcast.emit('checkOnlineResponse', usersConnected.get(socket.id), false);
             usersConnected.delete(socket.id);
         })
         socket.on('user login', function (username) {
-            console.log(username + " is connected");
+            io.emit('checkOnlineResponse', username, true);
             usersConnected.set(socket.id, username);
             //io.emit('system msg',UserName + " is connected");
         });
@@ -272,12 +259,24 @@ io.on('connection', function(socket) {
         })
     })
 
+    //sending images
+    socket.on('tryToSendImage',function () {
+        console.log("Trying to send image");
+    })
     socket.on('deleteFriend',function (username,friendUsername) {
         database.deleteFriend(username,friendUsername,function () {
                 console.log("Prietenul a fost sters");
             socket.emit("reload list friends");
                 io.to(usersConnected.search(friendUsername)).emit("reload list friends");
 
+    //check if user online / offline
+    socket.on('checkOnline', function (user) {
+        if(usersConnected.search(user) != null){
+            socket.emit('checkOnlineResponse', user, true);
+        }else{
+            socket.emit('checkOnlineResponse', user, false);
+        }
+    })
         })
     })
     });

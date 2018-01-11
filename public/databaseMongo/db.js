@@ -77,7 +77,7 @@ exports.findUser = function(username,password, callback ){
 exports.findAllUsers = function( callback ){
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        db.collection("users").find({},{ _id: false, password: false, CNP: false, friends: false, lastName: false, name:false}).toArray(function(err, result) {
+        db.collection("users").find({},{ _id: false, password: false, CNP: false, friends: false, lastName: false, name:false, img:false}).toArray(function(err, result) {
             if (err) throw err;
             db.close();
             callback(result);
@@ -180,6 +180,18 @@ var modified = false;
             if (obj.result.n != 0){
                 modified = true;
                 //TODO: delete user from client's list of friends
+                db.collection("users").find({},{ _id: false, password: false, CNP: false, friends: false, lastName: false, name:false, img: false}).toArray(function(err, users) {
+                    if (err) throw err;
+                    db.close();
+                    users.forEach(function (user, index) {
+                        db.collection("users").updateOne({username: user},{$pull: {friends: username}},function (err) {
+                            if (err) throw err;
+                            db.close();
+                            callback();
+                        })
+                    })
+                });
+
             }
             db.close();
             callback(modified);
@@ -224,11 +236,41 @@ exports.findPhotoTest= function(username, callback ){
     });
 };
 
+//CNP verify
 /*
-* var nameSchema = new mongoose.Schema({
-  firstName: String,
-  lastNameName: String
-});*/
+exports.insertCNP = function () {
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var myobj = [
+            { name: 'Alexandru', lastName: 'Rosca',CNP: '123456'},
+            { name: 'Bianca', lastName: 'Bianca',CNP: '612345'},
+            { name: 'Cosmin', lastName: 'Nechifor',CNP: '561234'},
+            { name: 'Mihai', lastName: 'Visovan',CNP: '456123'}
+        ];
+        db.collection("customers").insertMany(myobj, function(err, res) {
+            if (err) throw err;
+            console.log("Number of documents inserted: " + res.insertedCount);
+            db.close();
+        });
+    });
+}
+*/
 
+exports.checkCNP = function (name, lastName, cnp, callback) {
+    var ok = false;
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var query = { name: name, lastName: lastName,CNP: cnp};
+        console.log(query);
+        db.collection("customers").find(query).toArray(function(err, result) {
+            if (err) throw err;
+            if(result.length == 1){
+                ok = true;
+            }
+            db.close();
+            callback(ok);
+        });
+    });
+}
 
 

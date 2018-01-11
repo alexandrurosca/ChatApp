@@ -15,17 +15,16 @@ exports.form = function (req,res){
     else {
         database.findUser(req.body.userName, req.body.password, function (found , user) {
             if(found){
+
                 //admin
-                if(req.body.userName == "alex" && req.body.password == 123){
+                if(req.body.userName == "admin" && req.body.password == 'admin'){
                     res.redirect("http://localhost:3000/admin");
                     //res.render('./admin.ejs');
                 }else {
-
-
                     req.session.user = user;
-                    res.cookie('user', user.username);
-                    res.render('./chatTemplate.ejs', {user: user});
-                    //res.redirect("http://localhost:3000/chatTemplate")
+                    //res.cookie('user', user.username);
+                    // res.render('./chatTemplate.ejs', {user: user});
+                    res.redirect("http://localhost:3000/chatTemplate")
                     console.log("You can go on chat page!");
                 }
             }else{
