@@ -4,6 +4,7 @@
 var username;
 var socket;
 var openedRoom;
+var imageTry;
 
 $(document).ready(function(){
     socket = io();
@@ -97,7 +98,14 @@ $(function () {
         var friendName =$('#nameFriendInput').val();
         console.log('deleteFriend');
         socket.emit('deleteFriend', username, friendName ); })
-
+    //send picture
+    $('#sendPhoto').submit(function () {
+        //var data = {name:username, msg: imageTry, room: openedRoom };
+        socket.emit('chat message', data);
+        $('#m').val('');
+    })
+    
+    
     socket.on('confirm add friend', function (data, modified, friendName) {
         alert(data);
         if(modified){
@@ -223,3 +231,6 @@ function addListenerForDrop () {
             }
         })
     }}
+
+
+    imageTry = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAEAAAAAAAD//gA8Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gODAKAP/bAEMAAgEBAgEBAgICAgICAgIDBQMDAwMDBgQEAwUHBgcHBwYHBwgJCwkICAoIBwcKDQoKCwwMDAwHCQ4PDQwOCwwMDP/bAEMBAgICAwMDBgMDBgwIBwgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDP/AABEIAB4AKAMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APWDrEzXUBd2245DNkEexzngc/n6VqWDmSbcJGEjfd3Y69OnPHv79qy4NPMLxjz2aNs8YAX059e4zx1q6si2t6m5sqrHDdcdB/kV/KdS8tEHL1Zav0dEVpNu5WIyRtyOmD2xTIL9bOKIt/C3zc9eBkc8/wD6zmpLzWYVsv3kjcNycEbgDnr+J/w7Vk3NqWkDLlWwSAcYc46/56VUY8m45O+xciv47m4l2xv5kZyM55Pt6kY/lRVC2s2gkaRl2464BYe/I59P88AolLXQXK2a9xYWdgs7SNLtQKCAAzA+2eO351kXiNDM2258xeoYfKDjPPHQ9OKf/bsl1dnexaNkJwAFIO3P8iR2o1K1xN5jKrNvwG3EFepGO3b9T1p8qiw5rspMygOGdgc7uCTv9sAk9f6+nOjpsizLGrSblXpnpx90+uazr2xbRpY5GZWTHOB8xJHb0x/hVqyvvLMbdHACjjIAO4Y6+1RKabsVy9Ua/wDaEVraPGzFFxxtB+UdfwHAorHu7tr2VdzMPl6g4IPOfr06mitNOpPvH//Z';

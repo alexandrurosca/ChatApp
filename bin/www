@@ -136,7 +136,7 @@ io.on('connection', function(socket) {
             usersConnected.delete(socket.id);
         })
         socket.on('user login', function (username) {
-            io.emit('checkOnlineResponse', username, true);
+            socket.broadcast.emit('checkOnlineResponse', username, true);
             usersConnected.set(socket.id, username);
             //io.emit('system msg',UserName + " is connected");
         });
@@ -268,16 +268,16 @@ io.on('connection', function(socket) {
                 console.log("Prietenul a fost sters");
             socket.emit("reload list friends");
                 io.to(usersConnected.search(friendUsername)).emit("reload list friends");
-
+        })
+    })
     //check if user online / offline
     socket.on('checkOnline', function (user) {
+        console.log("verify: ", user);
         if(usersConnected.search(user) != null){
             socket.emit('checkOnlineResponse', user, true);
         }else{
             socket.emit('checkOnlineResponse', user, false);
         }
-    })
-        })
     })
     });
 
