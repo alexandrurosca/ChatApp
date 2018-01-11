@@ -236,6 +236,17 @@ io.on('connection', function(socket) {
             //socket.emit('openChat', room);
         });
 
+        //profile picture
+        socket.on('profilePicture', function (username) {
+            database.findPhoto(username, function (result) {
+                try {
+                    socket.emit('profilePicture', result.img.buffer.toString('base64'));
+                }catch(e){
+                    console.log("No picture");
+                }
+            })
+        })
+
 
         //admin
         socket.on('usersList', function () {
@@ -249,7 +260,7 @@ io.on('connection', function(socket) {
     socket.on('findImage', function () {
         database.findPhoto("asdas",function (result) {
             console.log("From database: ", result.img.buffer);
-            socket.emit('uploadProfile', result.img.buffer);
+            socket.emit('uploadProfile', result.img.buffer.toString('base64'));
         })
     })
 

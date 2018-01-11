@@ -1,6 +1,7 @@
 //var express = require('express');
 var database = require('../databaseMongo/db.js');
 var mail = require('../mail/mail.js');
+var fs = require("fs");
 
 exports.form = function (req,res){
 
@@ -22,18 +23,24 @@ exports.form = function (req,res){
     req.checkBody('CNP','Must insert a your CNP!').notEmpty();
     req.checkBody('CNP','Incorect CNP format!').isNumeric();
     req.checkBody('CNP','Password length minim 8!').isLength({min:3});*/
-
     var errors = req.validationErrors();
     console.log(errors);
     if (errors)  res.render('./createAccount.ejs',{error: errors});
-    else {
+
+    if (req.file == null) {
+        res.render('./createAccount.ejs', { error:'Please select a picture file to submit!'});
+    } else {
+        //profile Picture
+        var newImg = fs.readFileSync(req.file.path);
+        var encImg = newImg.toString('base64');
         var user  = {
             name : req.body.firstName,
             lastName : req.body.lastName,
             username : req.body.userName,
             CNP : req.body.CNP,
             password: req.body.password,
-            friends: ["x"]
+            friends: ["x"],
+            img: Buffer(encImg, 'base64')
         };
         database.findUsername(user.username, function (result) {
             if(result){

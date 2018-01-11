@@ -7,15 +7,19 @@
 <body>
 <div id="logo">  <img src="../images/hope.jpg" style="max-width:100%;height:auto;"/> </div>
 <div id="log">
-    <form  method="post">
+    <form action="/createAccount/uploadPicture" method="POST" enctype="multipart/form-data">
         <input id="firstName" name="firstName" type="text" placeholder="First Name">
         <input id="lastName" name="lastName" type="text" placeholder="Last Name">
         <input id="CNP" name="CNP" type="text" placeholder="CNP">
         <input id="userName" name="userName" type="text" placeholder="User name">
         <input id="password" name="password" type="password" placeholder="Password">
+        <input type="file" name="picture" accept="application/x-zip-compressed,image/*">
         <button id="cAcc">Create Account</button>
     </form>
 </div>
+
+
+
 
 <div id="errors">
     <% for(var i=0; i < error.length; i++) { %>

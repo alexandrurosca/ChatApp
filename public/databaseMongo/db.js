@@ -205,6 +205,17 @@ exports.uploadPhoto = function (newItem, callback) {
 exports.findPhoto= function(username, callback ){
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
+        db.collection("users").findOne({username: username}, function(err, result) {
+            if (err) throw err;
+            db.close();
+            callback(result);
+        });
+    });
+};
+
+exports.findPhotoTest= function(username, callback ){
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
         db.collection("yourcollectionname").findOne({}, function(err, result) {
             if (err) throw err;
             db.close();

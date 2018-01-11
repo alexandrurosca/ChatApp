@@ -24,15 +24,8 @@ $(function () {
 
     socket.on('uploadProfile', function (source) {
 
-      //  var img = new DataView(source);
-        console.log("source:", source);
-
-        var src = "data:image/jpeg;base64," + source.toString()('ascii');
-
-
+        var src = "data:image/jpeg;base64," + source;
         document.getElementById('profilePicture').setAttribute('src', src);
-
-
     })
 
 });

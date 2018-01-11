@@ -10,6 +10,7 @@ $(document).ready(function(){
     socket = io();
     username = window.user;
     socket.emit('friendsList',username);
+    socket.emit('profilePicture', username);
     console.log("Here");
 });
 
@@ -172,23 +173,14 @@ $(function () {
         socket.emit('connectToRoom',room);
     });
 
-    //images
-    /*
-    socket.on('connect', function(){
-        var delivery = new Delivery(socket);
 
-        delivery.on('receive.start',function(fileUID){
-            console.log('receiving a file!');
-        });
+    //profile picture
+    socket.on('profilePicture', function (source) {
+        var src = "data:image/jpeg;base64," + source;
+        document.getElementById('profilePicture').setAttribute('src', src);
+    })
 
-        delivery.on('receive.success',function(file){
-            if (file.isImage()) {
-                $('img').attr('src', file.dataURL());
-            };
-        });
-    });
 
-    */
 
 
 });
