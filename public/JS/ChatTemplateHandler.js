@@ -43,6 +43,7 @@ function addListenerForOpenConversationButton() {
 }
 
     function addListenerFriend() {
+
         var friends = document.getElementsByClassName('friend');
 
         for(var  i = 0;i<friends.length;i++) {
@@ -86,8 +87,9 @@ $(function () {
         socket.emit('add friend', username, friendName ); })
 
     //listener for deleteFriend
-    document.getElementById('addFriendButton').addEventListener('click',function () {
+    document.getElementById('deleteFriendButton').addEventListener('click',function () {
         var friendName =$('#nameFriendInput').val();
+        console.log('deleteFriend');
         socket.emit('deleteFriend', username, friendName ); })
 
     socket.on('confirm add friend', function (data, modified, friendName) {
@@ -100,7 +102,9 @@ $(function () {
         }
 
     });
-
+    socket.on('reload list friends',function () {
+        socket.emit('friendsList',username);
+    })
     socket.on('request add friend', function (friend) {
         var confirmAccept = confirm(friend + ' wants to add you!');
         console.log("Confirm accept: ", confirmAccept);
@@ -112,6 +116,7 @@ $(function () {
         socket.emit('user login', username);
         lastIndexOfFriend = friends.length;
         var friendsList = document.getElementById('friendsList');
+        friendsList.innerHTML="";
         try{
 
             for(var  i = 0;i<friends.length;i++) {

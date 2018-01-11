@@ -272,7 +272,14 @@ io.on('connection', function(socket) {
         })
     })
 
+    socket.on('deleteFriend',function (username,friendUsername) {
+        database.deleteFriend(username,friendUsername,function () {
+                console.log("Prietenul a fost sters");
+            socket.emit("reload list friends");
+                io.to(usersConnected.search(friendUsername)).emit("reload list friends");
 
+        })
+    })
     });
 
 function setNames(user, friend) {
