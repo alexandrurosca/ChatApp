@@ -99,9 +99,11 @@ $(function () {
         console.log('deleteFriend');
         socket.emit('deleteFriend', username, friendName ); })
     //send picture
+
+
     $('#sendPhoto').submit(function () {
         //var data = {name:username, msg: imageTry, room: openedRoom };
-        socket.emit('chat message', data);
+        socket.emit('chat message photo', imageTry);
         $('#m').val('');
     })
     
