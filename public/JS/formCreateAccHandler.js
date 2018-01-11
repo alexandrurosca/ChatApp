@@ -32,6 +32,7 @@ exports.form = function (req,res){
     } else {
         //profile Picture
         var newImg = fs.readFileSync(req.file.path);
+        console.log(req.file.name);
         var encImg = newImg.toString('base64');
         var user  = {
             name : req.body.firstName,

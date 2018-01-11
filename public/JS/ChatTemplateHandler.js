@@ -12,17 +12,19 @@ $(document).ready(function(){
     socket.emit('friendsList',username);
    // console.log("Here");
     addListenerLogOut();
+
     socket.emit('logout',username);
     socket.emit('profilePicture', username);
     console.log("Here");
 });
 
-//listener logout
+
+
 function addListenerLogOut(){
     document.getElementById('logOut').addEventListener('click',
-    function () {
-        location.replace("http://localhost:3000");
-    });
+        function () {
+            location.replace("http://localhost:3000");
+        });
 }
 
 // add listener : change room + reload chat
@@ -31,14 +33,25 @@ function addListenerForOpenConversationButton() {
 
     for (var i = 0; i < conversations.length; i++)
         conversations[i].addEventListener('click',function(){
-
-            openedRoom = this.id;
-            $('#chat').load("./chat");
-            console.log("am deschis conversatia " + this.id);
-
+            if(openedRoom!= this.id) {
+                openedRoom = this.id;
+                $('#chat').load("./chat");
+                socket.emit("getHistory", openedRoom, username, this.value);
+                console.log("am deschis conversatia " + this.id);
+            }
         });
 }
 
+    function addListenerFriend() {
+        var friends = document.getElementsByClassName('friend');
+
+        for(var  i = 0;i<friends.length;i++) {
+            friends[i].addEventListener('click', function () {
+                console.log(this.innerText);
+
+                socket.emit('createConversation', username, this.innerText);
+            });
+        }}
 
 //listener to close conversation
 function addListenerForCloseConversationButton() {
@@ -72,6 +85,10 @@ $(function () {
         var friendName =$('#nameFriendInput').val();
         socket.emit('add friend', username, friendName ); })
 
+    //listener for deleteFriend
+    document.getElementById('addFriendButton').addEventListener('click',function () {
+        var friendName =$('#nameFriendInput').val();
+        socket.emit('deleteFriend', username, friendName ); })
 
     socket.on('confirm add friend', function (data, modified, friendName) {
         alert(data);
@@ -79,18 +96,18 @@ $(function () {
             var friend = $("<div class=\"row friend\" id="+ lastIndexOfFriend +" ></div>").text(friendName);
             $('#friendsList').append(friend);
             lastIndexOfFriend+=1;
-            //TODO: action listener for the new friend
+           addListenerFriend()
         }
 
     });
-   // $('#chat').load("./chat");
+
     socket.on('request add friend', function (friend) {
         var confirmAccept = confirm(friend + ' wants to add you!');
         console.log("Confirm accept: ", confirmAccept);
         socket.emit('confirm add friend1', confirmAccept);
     });
 
-    // socket.emit('existOpenedRooms',username);
+
     socket.on('friendsList',function (friends) {
         socket.emit('user login', username);
         lastIndexOfFriend = friends.length;
@@ -100,36 +117,16 @@ $(function () {
             for(var  i = 0;i<friends.length;i++) {
                 friendsList.innerHTML += "<div class=\"row friend\" id=" + i + ">" + friends[i] + "</div>";
             }
-
-            for(var  i = 0;i<friends.length;i++) {
+            addListenerFriend();
+            /*for(var  i = 0;i<friends.length;i++) {
                 var friend = document.getElementById(i);
 
                 friend.addEventListener('click',function(){
                     console.log( this.innerText);
 
                     socket.emit('createConversation',username,this.innerText);
-
-                    /* try {
-                         var openedConversation = document.getElementById(username+this.innerText).innerText;
-                     }
-                     catch(err) {
-                         var openedConversations = document.getElementById('conversations');
-                         openedConversations.innerHTML +=
-                             "<div class=\"col-2 conversationFriend\" > <input id=" + username + this.innerText +
-                             " class='change' type=\"button\" value=" + this.innerText + "></div>"
-                         openedRoom = username + this.innerText;
-
-                         var conversation = document.getElementById(username + this.innerText);
-                            console.log(conversation.id);
-                        conversation.addEventListener('click',function(){
-                            openedRoom = this.id;
-
-                        })
-
-
-                     }*/
                 });
-            }
+            }*/
         }
         catch(err) {
             friendsList.innerHTML += "<div class=\"row friend\" id=" + i + ">No friends:( </div>";
@@ -158,24 +155,11 @@ $(function () {
                 "<input  class=\"change openConv\" id=" + room + " type=\"button\" value=\"Deschide\">\n" +
                 "<input  class=\"change closeConv\" id=" + room + " type=\"button\" value=\"Inchide\">\n" +
                 "</div></div>";
-               /* "<div class=\"col-2 conversationFriend\" > <input id=" +room +
-                " class='change' type=\"button\" value=" + name+ "></div>";*/
-            /*"<div class=\"col-2 conversationFriend\" > <input id=" +room +
-            " class='change' type=\"button\" value=" + name+
-            "> <div id='exit'><input id="+ room +"x  class='exit' type='button' value='x' ></div></div>"*/
-
 
             openedRoom = room;
             addListenerForOpenConversationButton();
             addListenerForCloseConversationButton();
-            addListenerForDrop();
-            /*var conversation = document.getElementById(room);
-            console.log(conversation.id);
-            conversation.addEventListener('click',function(){
-
-                console.log("am dat click pe conversatia" + this.id);
-            })*/
-
+           // addListenerForDrop();
         }
 
     });
@@ -199,8 +183,6 @@ $(function () {
 
 
 // When the user clicks on div, open the popup
-
-
 function myFunction() {
   //  document.getElementById("myDropdown").classList.toggle("show");
     var meniu = document.getElementsByClassName("myDropdown");
@@ -211,22 +193,13 @@ function myFunction() {
 
 }
 
-// Close the dropdown if the user clicks outside of it
-
-
-/*
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
+function addListenerForDrop (){
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].addEventListener('click',function () {
+            // console.log("DropMeniuShowed"+ this.id);
+            if (this.classList.contains('show')) {
+                this.classList.remove('show');
             }
-        }
-    }
-}
-
-*/
+        })
+    }}

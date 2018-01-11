@@ -228,7 +228,15 @@ io.on('connection', function(socket) {
 
 
         });
-
+    socket.on('getHistory',function (room,username ,friendUsername) {
+        database.findConversationsByRoom(room, function (modified, result) {
+            //console.log(result);
+            if(modified){
+                io.to(usersConnected.search(username)).emit('system msg', result);
+                io.to(usersConnected.search(friendUsername)).emit('system msg', result);
+            }
+        })
+    });
         socket.on('connectToRoom', function (room) {
             console.log("user2connect");
             socket.join(room);
