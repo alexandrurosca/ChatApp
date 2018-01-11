@@ -1,11 +1,11 @@
 var socket;
 
 
-
 $(document).ready(function(){
     socket = io();
     socket.emit('usersList');
-    socket.emit('findImage');
+    addListenerLogOut();
+
 });
 
 
@@ -14,18 +14,46 @@ $(function () {
         //try
         var usersList = document.getElementById('friendsList');
         //console.log(users);
-
         users.forEach(function (item, index) {
-            usersList.innerHTML += "<div class=\"row friend\" id=" + index + ">" + item.username + "</div>";
+            usersList.innerHTML +=
+            "<div class=\"dropdown row friend \" id=" + item.username + "div >" + item.username +
+            "<div id=\"myDropdown\" class=\" col-2 myDropdown dropdown-content edit\">\n" +
+            "<input  class=\"change deleteUser\" id=" + item.username + "  type=\"button\" value=\"Sterge\">\n" +
+            "</div></div>";
         })
-        //TODO: add action listener to users
-
+        addListenerForCloseConversationButton();
+        addListenerForDrop();
     })
-
-    socket.on('uploadProfile', function (source) {
-
-        var src = "data:image/jpeg;base64," + source;
-        document.getElementById('profilePicture').setAttribute('src', src);
-    })
-
 });
+
+//listener logout
+function addListenerLogOut(){
+    document.getElementById('logOut').addEventListener('click',
+        function () {
+            location.replace("http://localhost:3000");
+        });
+}
+function addListenerForCloseConversationButton() {
+    var conversations = document.getElementsByClassName('deleteUser');
+
+    for (var i = 0; i < conversations.length; i++)
+        conversations[i].addEventListener('click',function(){
+
+
+            var parent = document.getElementById("friendsList");
+            var child = document.getElementById(this.id+ "div");
+            parent.removeChild(child);
+           // console.log("am inchis conversatia " + this.id);
+
+        });
+}
+function addListenerForDrop (){
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].addEventListener('click',function () {
+            // console.log("DropMeniuShowed"+ this.id);
+            if (this.classList.contains('show')) {
+                this.classList.remove('show');
+            }
+        })
+    }}

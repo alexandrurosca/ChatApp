@@ -10,10 +10,20 @@ $(document).ready(function(){
     socket = io();
     username = window.user;
     socket.emit('friendsList',username);
+   // console.log("Here");
+    addListenerLogOut();
+    socket.emit('logout',username);
     socket.emit('profilePicture', username);
     console.log("Here");
 });
 
+//listener logout
+function addListenerLogOut(){
+    document.getElementById('logOut').addEventListener('click',
+    function () {
+        location.replace("http://localhost:3000");
+    });
+}
 
 // add listener : change room + reload chat
 function addListenerForOpenConversationButton() {
@@ -30,7 +40,7 @@ function addListenerForOpenConversationButton() {
 }
 
 
-
+//listener to close conversation
 function addListenerForCloseConversationButton() {
     var conversations = document.getElementsByClassName('closeConv');
 
@@ -48,6 +58,7 @@ function addListenerForCloseConversationButton() {
 
         });
 }
+
 $(function () {
     document.getElementById('infoUser').innerText=username;
     $('#chat').submit(function(){
@@ -202,16 +213,7 @@ function myFunction() {
 
 // Close the dropdown if the user clicks outside of it
 
-function addListenerForDrop (){
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    for (var i = 0; i < dropdowns.length; i++) {
-        dropdowns[i].addEventListener('click',function () {
-           // console.log("DropMeniuShowed"+ this.id);
-            if (this.classList.contains('show')) {
-                this.classList.remove('show');
-            }
-        })
-}}
+
 /*
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {

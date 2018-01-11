@@ -12,6 +12,7 @@ router.get('/', function(req, res){
 // Form POST action handler
 router.post('/uploadPicture', upload.single('picture'), formAdminHandler.form);
 
+
 //upload
 /*
 router.get('/picture/:picture', function(req, res){

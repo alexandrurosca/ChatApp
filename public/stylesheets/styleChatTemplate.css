@@ -182,7 +182,7 @@ div[id='exit']:hover{visibility: visible;}
 
 .dropdown {
     position: relative;
-    display: inline-block;
+    //display: inline-block;
 }
 
 .dropdown-content {
@@ -192,6 +192,17 @@ div[id='exit']:hover{visibility: visible;}
     left: 1vw;
     min-width: 160px;
    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    z-index: 1;
+    background-color: transparent;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+
+    left: 1vw;
+    min-width: 160px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
     z-index: 1;
     background-color: transparent;
 }
@@ -211,4 +222,8 @@ div[id='exit']:hover{visibility: visible;}
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+.edit {
+    top: -0.5vh;
+    left: 12vw;
 }

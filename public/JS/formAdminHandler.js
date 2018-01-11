@@ -15,6 +15,7 @@ exports.form = function (req,res){
         // encode the file as a base64 string.
         var encImg = newImg.toString('base64');
         // define your new document
+       // console.log(encImg);
         var newItem = {
             description: req.body.description,
             contentType: req.file.mimetype,

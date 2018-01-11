@@ -1,0 +1,76 @@
+div[id="log"] {
+    overflow: auto;
+    //width: 25vw;
+    //min-width: 210px;
+    //max-width: 25vw;
+    //height: auto;
+    //margin: 0% 37.5%;
+    //padding: 0.1% 0.1%;
+    float: left;
+
+}
+div[id="logo"] {
+    overflow: visible;
+    min-width: 210px;
+    width: 50%;
+    max-width:50vw;
+    margin: 5% 30% 2%;
+}
+input {
+    width: 100%;
+    padding: 3% 3%;
+    margin: 0.5% 0%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50px;
+}
+.buttonForm{
+    padding: 3% 3%;
+    margin: 0.5% 0%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50px;
+    background-color: #F26101;
+    border:none;
+    width:49%;
+    float: left;
+}
+
+.inputForm{ padding: 3% 3%;
+    margin: 0.5% 0%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50px;
+    background-color: #F26101;
+    border:none;
+    width:49%;
+    float: left;
+    margin: 0.5% 0.5%;}
+
+button[id='cAcc']{width:100%;}
+div[id='errors']{
+    padding: 0.5% 2%;
+    font-size: 20px;
+    color: #F26101;
+    width: 25vw;
+    min-width: 210px;
+    max-width: 25vw;
+    height: auto;
+    margin: 0% 37.5%;
+}
+*:focus {
+    outline: none;
+}
+
+form[id='chat'] {  border: 1px; background: #F26101; padding: 0px;  bottom: 0; width: 100%; position: absolute; left: 0; height: 10%;}
+form input[id='m'] { border: 0; padding: 10px; width: 90%;
+    margin-right: .5%; background:#F26101; height: 10%;}
+form button[id='chatB'] { width: 9%; background: white; border: 1px; padding: 0px; border-radius: 50px; height: 90%;
+}
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; text-overflow: ellipsis;}
+#messages li:nth-child(odd) { background: #d9e8f5; }
+#messages { margin-bottom: 40px }

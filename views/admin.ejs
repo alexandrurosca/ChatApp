@@ -2,80 +2,57 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">
+    <link rel="stylesheet" href="../stylesheets/admin.css">
 </head>
 <body>
 
 <div class="col-3 friendList" id="friendsList">
 </div>
-
 <div class="row">
     <div class="col-9 buttons" id='options'>
-
-        <div class="col-2 button" >
-            <input class='change' id= 'account' name="account" type="button" value="Account">
-        </div>
+        <br>Admin
         <div class="col-2 button" >
             <input  class='change' id= 'logOut' name="logOut" type="button" value="Log Out">
         </div>
     </div>
 
-    <div class="col-9" id='user'>
-        <div class="col-2" id='infoUser'>
+    <div class="col-6" id='chat'>
+        <div id='msg'>
+            <ul id="messages"></ul>
         </div>
-        <div class="col-2" id='infoUser'>
-        </div>
-        <div class="col-2" id='pozaUser'>
-            <img id="profilePicture"></img>
-        </div>
-        <div class="col-2" id='infoUser'>
-            admin
-        </div>
-    </div>
-
-    <div class="col-9 conversation" id= 'conversations'>
-
-    </div>
-
-    <div class="col-8" id='chat'>
-
-    </div>
-
-    <div class="col-1" id='options'>
-        <div class="row" id='option1'>
-            Option1
-        </div>
-        <div class="row" id='option2'>
-            Option2
-        </div>
-    </div>
-</div>
-<div class="col-3" id='optionsFriends'>
-    <div class='col-3 opf' id='op1'>
-        <form id='addFriends1' >
-            <input   id= 'addFriendButton' type="button" value="Add">
-            <input id="nameFriendInput" autocomplete="off" />
+        <form id='chat' action="" method="post">
+            <input id="m" autocomplete="off" /><button id='chatB' >Send</button>
         </form>
     </div>
 
-    <form action="/admin/uploadPicture" method="POST" enctype="multipart/form-data">
-        <input type="file" name="picture" accept="application/x-zip-compressed,image/*">
-
-        <input class="form-control" type="text" name="description" placeholder="Description or Message">
-
-        <input class="btn btn-primary" type="submit" value="submit">
-    </form>
-    <!-- <form id='chat' action="" method="post">
-            <input id="m" autocomplete="off" /><button>Send</button>
-        </form>-->
-
-    <div class='col-1 opf' id='op2'>
-        Op1
-    </div>
+    <div id="log" class="col-3">
+        <form  method="post">
+            <input id="firstName" name="firstName" type="text" placeholder="First Name">
+            <input id="lastName" name="lastName" type="text" placeholder="Last Name">
+            <input id="CNP" name="CNP" type="text" placeholder="CNP">
+            <input id="userName" name="userName" type="text" placeholder="User name">
+            <input id="password" name="password" type="password" placeholder="Password">
+            <button id="cAcc" class = 'buttonForm'>Creaza un nou cont</button>
+        </form>
+        </div>
 </div>
+
+
+<!-- <div class="col-3" id='optionsFriends'>
+   <div class='col-3 opf' id='op1'>
+       <form id='addFriends1' >
+           <input   id= 'addFriendButton' type="button" value="Add">
+           <input id="nameFriendInput" autocomplete="off" />
+       </form>
+   </div>
+
+
+  <form id='chat' action="" method="post">
+           <input id="m" autocomplete="off" /><button>Send</button>
+       </form>-->
+
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-
-
 <script src="../JS/adminHandler.js"></script>
 </body>
 </html>
