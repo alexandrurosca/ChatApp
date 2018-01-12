@@ -98,14 +98,14 @@ $(function () {
         var friendName =$('#nameFriendInput').val();
         console.log('deleteFriend');
         socket.emit('deleteFriend', username, friendName ); })
+
     //send picture
-
-
-    $('#sendPhoto').submit(function () {
-        //var data = {name:username, msg: imageTry, room: openedRoom };
-        socket.emit('chat message photo', imageTry);
-        $('#m').val('');
+    document.getElementById('sendPhoto').addEventListener('click',function () {
+        console.log("send photo");
+        var data = {img: imageTry, room: openedRoom };
+        socket.emit('chat message photo', data);
     })
+
     
     
     socket.on('confirm add friend', function (data, modified, friendName) {

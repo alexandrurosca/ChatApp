@@ -7,6 +7,12 @@ $(function () {
         $('#messages').append($('<li>').text(msg.name + " : " +msg.msg));
         $('#msg').scrollTop($('#msg')[0].scrollHeight);
     });
+    
+    socket.on('chat message photo', function (photo) {
+        //document.getElementById('profilePicture').setAttribute('src', photo);
+       // $('#messages').append($('<li>').text(msg.name + " : " +msg.msg));
+        document.getElementById('messages').innerHTML +=  "<img src=" + photo + "></img>";
+    })
 
     socket.on('system msg', function(msg){
         msg.forEach(function (item, index) {

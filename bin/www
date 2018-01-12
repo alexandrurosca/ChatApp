@@ -129,6 +129,10 @@ io.on('connection', function(socket) {
             console.log(message.room);
 
         });
+        
+        socket.on('chat message photo', function (photo) {
+            io.to(photo.room).emit('chat message photo', photo.img);
+        })
 
         socket.on('disconnect', function () {
             console.log("user: ", usersConnected.get(socket.id));
