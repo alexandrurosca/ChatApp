@@ -15,15 +15,27 @@ $(function () {
         var usersList = document.getElementById('friendsList');
         //console.log(users);
         users.forEach(function (item, index) {
-            usersList.innerHTML +=
-            "<div class=\"dropdown row friend \" id=" + item.username + "div >" + item.username +
-            "<div id=\"myDropdown\" class=\" col-2 myDropdown dropdown-content edit\">\n" +
-            "<input  class=\"change deleteUser\" id=" + item.username + "  type=\"button\" value=\"Sterge\">\n" +
-            "</div></div>";
+            if(item.username != 'admin'){
+                usersList.innerHTML +=
+                    "<div class=\"dropdown row friend \" id=" + item.username + "div >" + item.username +
+                    "<div id=\"myDropdown\" class=\" col-2 myDropdown dropdown-content edit\">\n" +
+                    "<input  class=\"change deleteUser\" id=" + item.username + "  type=\"button\" value=\"Sterge\">\n" +
+                    "</div></div>";
+            }
+
         })
         addListenerForCloseConversationButton();
         addListenerForDrop();
     })
+
+    //send message to everyone
+    $('#chat').submit(function(){
+        var data = {name: 'ADMIN', msg: $('#m').val()};
+        socket.emit('chat message admin', data);
+        $('#messages').append($('<li>').text(data.name + ' : ' + data.msg));
+        $('#m').val('');
+        return false;
+    });
 });
 
 //listener logout
@@ -39,7 +51,7 @@ function addListenerForCloseConversationButton() {
     for (var i = 0; i < conversations.length; i++)
         conversations[i].addEventListener('click',function(){
 
-            socket.emit('deleteUser',this.id);
+            socket.emit('deleteUser', this.id);
             var parent = document.getElementById("friendsList");
             var child = document.getElementById(this.id+ "div");
             parent.removeChild(child);

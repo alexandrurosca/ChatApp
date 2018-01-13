@@ -1,40 +1,65 @@
 var database = require('../databaseMongo/db.js')
     , fs = require('fs-extra')
 
-
 exports.form = function (req,res){
-    if (req.file == null) {
-        // If Submit was accidentally clicked with no file selected...
-        res.render('./admin.ejs', { title:'Please select a picture file to submit!'});
+    //validations
+    /*req.checkBody('userName','Must insert a user!').notEmpty();
+    req.checkBody('userName','Incorect user name format!Use just alphanumeric characters!').isAlphanumeric();
+    req.checkBody('userName','User name length minim 5!').isLength({min:5});
 
-        //res.redirect("http://localhost:3000/");
-    }
+    req.checkBody('password','Must insert a password!').notEmpty();
+    req.checkBody('password','Password length minim 8!').isLength({min:8});
+    req.checkBody('userName','Incorect password format!Use just alphanumeric characters!').isAlphanumeric();
+
+    req.checkBody('firstName','Must insert your fisrt name!').notEmpty();
+    req.checkBody('firstName','Incorect first name format !').isAlpha();
+
+    req.checkBody('lastName','Must insert your last name!').notEmpty();
+    req.checkBody('firstName','Incorect last name format!').isAlpha();
+
+    req.checkBody('CNP','Must insert a your CNP!').notEmpty();
+    req.checkBody('CNP','Incorect CNP format!').isNumeric();
+    req.checkBody('CNP','Password length minim 8!').isLength({min:3});*/
+    var errors = req.validationErrors();
+    console.log(errors);
+    if (errors)  res.render('./admin.ejs',{error: errors});
     else {
         // read the img file from tmp in-memory location
         var newImg = fs.readFileSync(req.file.path);
-        // encode the file as a base64 string.
+        console.log(req.file.name);
         var encImg = newImg.toString('base64');
-        // define your new document
-       // console.log(encImg);
-        var newItem = {
-            description: req.body.description,
-            contentType: req.file.mimetype,
-            size: req.file.size,
+        var user = {
+            name: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.userName,
+            CNP: req.body.CNP,
+            password: req.body.password,
+            friends: ["x"],
             img: Buffer(encImg, 'base64')
         };
 
-        database.uploadPhoto(newItem, function (modified) {
-            if(modified){
-                console.log("Image inserted");
-                fs.remove(req.file.path, function(err) {
-                    if (err) { console.log(err) };
-                    res.render('./admin.ejs', {title:'Thanks for the Picture!'});
-                });
+        database.checkCNP(user.name, user.lastName, user.CNP, function (realPerson) {
+            //TODO: hard codat, nu sterge
+            if (1) {
+                database.findUsername(user.username, function (result) {
+                    if (result) {
+                        console.log("Username already taken");
+                        res.render('./admin.ejs', {error: "Username already taken"});
 
-            }else{
-                console.log("Image not inserted");
+                    } else {
+                        database.addUser(user, function () {
+                            console.log("User added");
+                            res.redirect("http://localhost:3000/admin");
+                        });
+                    }
+                });
+            } else {
+                console.log("No real Person");
+                res.render('./admin.ejs', {error: "No real person"});
             }
         })
 
-    };
+
+    }
 }
+

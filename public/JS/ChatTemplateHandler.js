@@ -16,10 +16,8 @@ $(document).ready(function(){
     socket.emit('logout',username);
     socket.emit('profilePicture', username);
     console.log("Here");
-    setTimeout(onlineOffline, 1000);
+    setTimeout(onlineOffline, 200);
 });
-
-
 
 //listener logout
 function addListenerLogOut(){
@@ -55,9 +53,6 @@ function addListenerForOpenConversationButton() {
                 console.log(this.innerText);
 
                 socket.emit('createConversation', username, this.innerText);
-                //var myFile = $('#fileinput').prop('files')[0];
-                //console.log(myFile.name);
-               // handleFileSelect();
             });
         }}
 
@@ -89,8 +84,6 @@ function onlineOffline() {
     }
 }
 $(function () {
-
-
     document.getElementById('infoUser').innerText=username;
     $('#chat').submit(function(){
         var data = {name:username, msg: $('#m').val(), room: openedRoom, to:friend};
@@ -130,7 +123,8 @@ $(function () {
             var friend = $("<div class=\"row friend\" id="+ friendName +" ></div>").text(friendName);
             $('#friendsList').append(friend);
             //lastIndexOfFriend+=1;
-           addListenerFriend()
+           addListenerFriend();
+            socket.emit('checkOnline', friendName);
         }
 
     });
@@ -202,6 +196,7 @@ $(function () {
                 // addListenerForDrop();
             }
         }
+
     });
 
     socket.on('connectToRoom',function (room) {
@@ -219,11 +214,15 @@ $(function () {
     //online / offline
 
     socket.on('checkOnlineResponse', function (user, online) {
-        var div = document.getElementById(user);
-        if(online){
-            div.style.backgroundColor = '#708F2F';
-        }else{
-            div.style.backgroundColor = '#78331E';
+        try {
+            var div = document.getElementById(user);
+            if (online) {
+                div.style.backgroundColor = '#708F2F';
+            } else {
+                div.style.backgroundColor = '#78331E';
+            }
+        }catch (e){
+            //TODO: no user
         }
     })
 

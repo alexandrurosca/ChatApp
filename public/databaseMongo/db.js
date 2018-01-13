@@ -180,26 +180,39 @@ var modified = false;
             if (obj.result.n != 0){
                 modified = true;
                 //TODO: delete user from client's list of friends
-                /*
-                db.collection("users").find({},{ _id: false, password: false, CNP: false, friends: false, lastName: false, name:false, img: false}).toArray(function(err, users) {
+            }
+        });
+
+        db.collection("users").find({},{ _id: false, password: false, CNP: false, friends: false, lastName: false, name:false, img: false}).toArray(function(err, users) {
+            if (err) throw err;
+            users.forEach(function (user, index) {
+                db.collection("users").updateOne(user,{$pull: {friends: username}},function (err) {
                     if (err) throw err;
                     db.close();
-                    users.forEach(function (user, index) {
-                        db.collection("users").updateOne({username: user},{$pull: {friends: username}},function (err) {
-                            if (err) throw err;
-                            db.close();
-                            callback();
-                        })
-                    })
+                })
+            })
 
-                });
-                */
+            callback(modified);
+        });
+    });
+};
 
+exports.updateUser = function (user, newValue, callback) {
+var modified = false;
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var user = {username: user};
+        db.collection("users").updateOne(user,newValue, function (err, res) {
+            if (err) throw err;
+            if(res.result.nModified == 1){
+                modified = true;
             }
+            console.log("one user  modified ");
             db.close();
             callback(modified);
         });
     });
+
 };
 
 //pictures
@@ -273,6 +286,21 @@ exports.checkCNP = function (name, lastName, cnp, callback) {
             db.close();
             callback(ok);
         });
+    });
+}
+
+
+//find all rooms
+
+exports.findAllRooms = function (callback) {
+    var ok = false;
+    MongoClient.connect(url, function(err, db) {
+        db.collection("conversation").distinct("room",(function(err, docs){
+            console.log(docs.toString());
+            if(err) throw err;
+            db.close();
+            callback(docs);
+        }))
     });
 }
 

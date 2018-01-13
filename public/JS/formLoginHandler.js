@@ -23,8 +23,8 @@ exports.form = function (req,res){
                 }else {
                     req.session.user = user;
                     //res.cookie('user', user.username);
-                    // res.render('./chatTemplate.ejs', {user: user});
-                    res.redirect("http://localhost:3000/chatTemplate")
+                     res.render('./chatTemplate.ejs', {user: user});
+                   /// res.redirect("http://localhost:3000/chatTemplate")
                     console.log("You can go on chat page!");
                 }
             }else{

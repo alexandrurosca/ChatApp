@@ -26,13 +26,20 @@
     </div>
 
     <div id="log" class="col-3">
-        <form  method="post">
+        <form action="/admin/uploadPicture" method="POST" enctype="multipart/form-data">
             <input id="firstName" name="firstName" type="text" placeholder="First Name">
             <input id="lastName" name="lastName" type="text" placeholder="Last Name">
-            <input id="CNP" name="CNP" type="text" placeholder="CNP">
+            <input id="CNP" name="CNP" type="number" placeholder="CNP">
             <input id="userName" name="userName" type="text" placeholder="User name">
             <input id="password" name="password" type="password" placeholder="Password">
-            <button id="cAcc" class = 'buttonForm'>Creaza un nou cont</button>
+            <div class="file-upload">
+                <div class="file-select">
+                    <div class="file-select-button" id="fileName">Alege o imagine</div>
+                    <div class="file-select-name" id="noFile">Nici o imagine aleasa...</div>
+                    <input type="file" name="picture" accept="application/x-zip-compressed,image/*" id="chooseFile">
+                </div>
+            </div>
+            <button id="cAcc">Create Account</button>
         </form>
         </div>
 </div>
