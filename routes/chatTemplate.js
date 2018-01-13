@@ -5,12 +5,14 @@ var router = express.Router();
 var  upload = multer({limits: {fileSize: 2000000 },dest:'/uploads/'});
 
 router.get('/', function (req,res) {
-    console.log(req.session.id + "sessionId");
+  //  console.log(req.session.id + "sessionId");
 
     res.render('./chatTemplate.ejs');
 });
 
 router.post('/uploadPicture', upload.single('picture'), formSendPicture.form);
-
+router.post('/editAccount', function (req,res) {
+    res.render('./editAccount.ejs',{error: ""});
+});
 
 module.exports = router;

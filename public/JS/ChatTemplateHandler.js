@@ -13,11 +13,26 @@ $(document).ready(function(){
     socket.emit('friendsList',username);
    // console.log("Here");
     addListenerLogOut();
+    addListenerAccount();
     socket.emit('logout',username);
     socket.emit('profilePicture', username);
     console.log("Here");
-    setTimeout(onlineOffline, 200);
+    setTimeout(onlineOffline, 500);
 });
+//listener account
+function addListenerAccount(){
+
+    document.getElementById('account').addEventListener('click',
+        function () {
+            var form = document.createElement('form');
+            form.setAttribute('method', 'post');
+            form.setAttribute('action', 'chatTemplate/editAccount');
+            form.style.display = 'hidden';
+            document.body.appendChild(form)
+            form.submit();
+        });
+}
+
 
 //listener logout
 function addListenerLogOut(){
@@ -217,9 +232,19 @@ $(function () {
         try {
             var div = document.getElementById(user);
             if (online) {
-                div.style.backgroundColor = '#708F2F';
+                div.style.backgroundColor = '#DCEFF5';
+                $('#' + user).hover(function(){
+                    $(this).css("background-color", "#236475");
+                }, function(){
+                    $(this).css("background-color", '#DCEFF5');
+                });
             } else {
-                div.style.backgroundColor = '#78331E';
+                div.style.backgroundColor = '#304269';
+                $('#' + user).hover(function(){
+                    $(this).css("background-color", "#236475");
+                }, function(){
+                    $(this).css("background-color", '#304269');
+                });
             }
         }catch (e){
             //TODO: no user

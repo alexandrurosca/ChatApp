@@ -30,18 +30,24 @@ html {
     font-family: "Lucida Sans", sans-serif;
 }
 .friendList{
-    height: 90vh;
+   // height: 90vh;
     border:solid 2px;
     border-color:#F26101;
     overflow: auto;
 }
 
 .friend{
-    padding: 5% 1%;
-    margin: 5% 0% 0% 0%;
-    border-bottom:solid 1px;
+    padding: 4% 1%;
+    margin: 2% 0% 0% 0%;
+   // border-bottom:solid 1px;
     border-color:#F26101;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 100%;
+    font-family: "Georgia", serif;
 }
+
 .change{
     padding: 3% 3%;
     margin: 0.5% 0%;
