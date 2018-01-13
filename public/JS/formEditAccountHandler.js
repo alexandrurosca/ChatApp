@@ -32,7 +32,7 @@ exports.form = function (req,res){
        // res.render('./editAccount.ejs', { error:'Please select a picture file to submit!'});
         isImage = false;
 
-    } else {
+    }
         if(isImage){
             //profile Picture
             var newImg = fs.readFileSync(req.file.path);
@@ -41,7 +41,6 @@ exports.form = function (req,res){
             var user  = {
                 name : req.body.firstName,
                 lastName : req.body.lastName,
-                CNP : req.body.CNP,
                 password: req.body.password,
                 img: Buffer(encImg, 'base64')
             };
@@ -49,15 +48,15 @@ exports.form = function (req,res){
             var user  = {
                 name : req.body.firstName,
                 lastName : req.body.lastName,
-                CNP : req.body.CNP,
-                password: req.body.password,
+                password: req.body.password
             };
         }
 
         database.checkCNP(user.name,user.lastName, user.CNP, function (realPerson) {
             //TODO: hard codat, nu sterge
             if(1){
-                database.updateUser(req.body.userName,user, function (modified) {
+                //console.log("User from form:", req.body.userName);
+                database.updateUser(req.body.userName, user,isImage, function (modified) {
                     if(modified){
                         console.log("User data modified!");
                     }
@@ -73,5 +72,5 @@ exports.form = function (req,res){
 
 
 
-    }
+
 };

@@ -12,7 +12,8 @@ router.get('/', function (req,res) {
 
 router.post('/uploadPicture', upload.single('picture'), formSendPicture.form);
 router.post('/editAccount', function (req,res) {
-    res.render('./editAccount.ejs',{error: ""});
+    user = req.session.user;
+    res.render('./editAccount.ejs', {error: "", user: user});
 });
 
 module.exports = router;

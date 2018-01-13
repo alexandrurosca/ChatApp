@@ -197,17 +197,23 @@ var modified = false;
     });
 };
 
-exports.updateUser = function (user, newValue, callback) {
+exports.updateUser = function (user, newValue, isImage, callback) {
 var modified = false;
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
-        var user = {username: user};
-        db.collection("users").updateOne(user,newValue, function (err, res) {
+        var user1 = {username: user};
+        var newValue1;
+        if(isImage){
+            newValue1 = {$set: {lastName: newValue.lastName, password: newValue.password, img: newValue.img}}
+        }else{
+            newValue1 = {$set: {lastName: newValue.lastName, password: newValue.password}}
+        }
+        db.collection("users").updateOne(user1,newValue1, function (err, res) {
             if (err) throw err;
             if(res.result.nModified == 1){
                 modified = true;
             }
-            console.log("one user  modified ");
+            console.log(res);
             db.close();
             callback(modified);
         });

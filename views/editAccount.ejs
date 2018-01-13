@@ -6,11 +6,17 @@
 </head>
 <body>
 <div id="log">
+</div>
+<div class="col-2" id='pozaUser'>
+    <img id="profilePicture" height="130" width="130"/>
+</div>
+<div class="col-3" id='infoUser'>
+</div>
+
     <form action="/editAccount/uploadPicture" method="POST" enctype="multipart/form-data">
-        <input id="firstName" name="firstName" type="text" placeholder="First Name">
-        <input id="lastName" name="lastName" type="text" placeholder="Last Name">
-        <input id="CNP" name="CNP" type="number" placeholder="CNP">
-        <input id="userName" name="userName" type="text" placeholder="User name">
+        <input id="firstName" name="firstName" type="text" placeholder=<%=user.name%>>
+        <input id="lastName" name="lastName" type="text" placeholder=<%=user.lastName%>>
+        <input id="userName" name="userName" type="text" readonly placeholder=<%=user.username%>>
         <input id="password" name="password" type="password" placeholder="Password">
         <!--  <input type="file" name="picture" accept="application/x-zip-compressed,image/*">
         <input type="file" name="picture" accept="application/x-zip-compressed,image/*" style="visibility: hidden;"> -->
@@ -33,7 +39,9 @@
 </div>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<!--<script src="/JS/createAcc.js"></script> -->
+<script> var user = '<%= user.username%>'</script>
+<script src="/JS/editAccount.js"></script>
+
 <script>window.scrollTo(0,document.body.scrollHeight);</script>
 </body>
 </html>
