@@ -12,6 +12,7 @@ var HashMap = require('hashmap');
 var fs = require("fs");
 var path = require("express");
 var dateFormat = require('dateformat');
+var dl  = require('delivery');
 
 
 /**
@@ -115,6 +116,8 @@ io.on('connection', function(socket) {
         });
 
         socket.on('chat message', function (message) {
+            io.to(usersConnected.search(message.to)).emit('connectToRoom',message.room);
+            io.to(usersConnected.search(message.to)).emit('openChat',message.room,message.name);
             var now = new Date();
             var messageDB  = {
                 room : message.room,
@@ -122,16 +125,23 @@ io.on('connection', function(socket) {
                 date : dateFormat(now)
             };
            // console.log(messageDB);
-            database.addConversation(messageDB, function () {
-                console.log("Message added!");
-            })
-            io.to(message.room).emit('chat message', message);
-            console.log(message.room);
+
+            setTimeout(function () {
+                io.to(message.room).emit('chat message', message);
+                console.log(message.room);
+                setTimeout(function () {
+                    database.addConversation(messageDB, function () {
+                        console.log("Message added!");
+                    })
+                },100)
+
+            },200);
+
 
         });
         
-        socket.on('chat message photo', function (photo) {
-            io.to(photo.room).emit('chat message photo', photo.img);
+        socket.on('chat message photo', function (photo,username) {
+            io.to(photo.room).emit('chat message photo', photo.img,username);
         })
 
         socket.on('disconnect', function () {
@@ -203,18 +213,18 @@ io.on('connection', function(socket) {
             socket.join(room);
             socket.emit('openChat', room,friendUsername);
             //TODO
-            io.to(usersConnected.search(friendUsername)).emit('connectToRoom',room);
-            io.to(usersConnected.search(friendUsername)).emit('openChat',room,username);
+
+            //io.to(usersConnected.search(friendUsername)).emit('openChat',room,username);
             //search for conversation
-            setTimeout(function(){
+           /* setTimeout(function(){
                 database.findConversationsByRoom(room, function (modified, result) {
                     //console.log(result);
                     if(modified){
                         io.to(usersConnected.search(username)).emit('system msg', result);
-                        io.to(usersConnected.search(friendUsername)).emit('system msg', result);
+                        //io.to(usersConnected.search(friendUsername)).emit('system msg', result);
                     }
                 })
-            }, 500);
+            }, 500);*/
 
 
 
@@ -224,7 +234,7 @@ io.on('connection', function(socket) {
             //console.log(result);
             if(modified){
                 io.to(usersConnected.search(username)).emit('system msg', result);
-                io.to(usersConnected.search(friendUsername)).emit('system msg', result);
+                //io.to(usersConnected.search(friendUsername)).emit('system msg', result);
             }
         })
     });
@@ -273,7 +283,7 @@ io.on('connection', function(socket) {
             socket.emit("reload list friends");
                 io.to(usersConnected.search(friendUsername)).emit("reload list friends");
         })
-    })
+    });
     //check if user online / offline
     socket.on('checkOnline', function (user) {
         console.log("verify: ", user);
@@ -283,6 +293,14 @@ io.on('connection', function(socket) {
             socket.emit('checkOnlineResponse', user, false);
         }
     })
+
+    socket.on('deleteUser',function(user){
+        console.log('UserDeleted ');
+        database.deleteUser(user,function (result) {
+            console.log('UserDeleted ' + result);
+        })
+
+    });
     });
 
 function setNames(user, friend) {

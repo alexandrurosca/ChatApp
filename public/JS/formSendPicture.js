@@ -9,6 +9,7 @@ exports.form = function (req,res){
     } else {
         //profile Picture
         var newImg = fs.readFileSync(req.file.path);
+        console.log("path: ", req.file.path);
         var encImg = newImg.toString('base64');
         console.log("Image log", encImg);
         //res.render('./chatTemplate.ejs');

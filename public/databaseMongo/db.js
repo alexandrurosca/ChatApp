@@ -180,6 +180,7 @@ var modified = false;
             if (obj.result.n != 0){
                 modified = true;
                 //TODO: delete user from client's list of friends
+                /*
                 db.collection("users").find({},{ _id: false, password: false, CNP: false, friends: false, lastName: false, name:false, img: false}).toArray(function(err, users) {
                     if (err) throw err;
                     db.close();
@@ -190,7 +191,9 @@ var modified = false;
                             callback();
                         })
                     })
+
                 });
+                */
 
             }
             db.close();

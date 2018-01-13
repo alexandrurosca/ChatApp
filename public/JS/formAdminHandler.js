@@ -12,7 +12,6 @@ exports.form = function (req,res){
     else {
         // read the img file from tmp in-memory location
         var newImg = fs.readFileSync(req.file.path);
-
         // encode the file as a base64 string.
         var encImg = newImg.toString('base64');
         // define your new document

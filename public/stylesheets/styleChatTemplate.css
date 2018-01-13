@@ -70,7 +70,7 @@ html {
     border-color:#F26101;
     min-height: 4vh;}
 
-img {
+img[id='profilePicture'] {
     border-radius: 50%;
     border:solid 1px;
     border-color:#F26101;

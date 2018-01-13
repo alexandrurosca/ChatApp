@@ -39,7 +39,7 @@ function addListenerForCloseConversationButton() {
     for (var i = 0; i < conversations.length; i++)
         conversations[i].addEventListener('click',function(){
 
-
+            socket.emit('deleteUser',this.id);
             var parent = document.getElementById("friendsList");
             var child = document.getElementById(this.id+ "div");
             parent.removeChild(child);
