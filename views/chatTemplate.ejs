@@ -34,7 +34,7 @@
         <div class="col-2" id='pozaUser'>
             <img id="profilePicture" height="130" width="130"/>
         </div>
-        <div class="col-3" id='infoUser'>
+        <div class="col-3 " id='infoUser'>
         </div>
     </div>
 
@@ -50,8 +50,13 @@
         <div class="row" id='option1'>
             <input  class="change " id='sendPhoto' type="button" value="Trimite poza">
             <form action="/chatTemplate/uploadpicture" method="POST" enctype="multipart/form-data">
-                <input type="file" id="fileinput" name="picture" accept="application/x-zip-compressed,image/*">
-                <input id = "sendImage" class="btn btn-primary" type="submit" value="submit">
+              <!--  <input type="file" id="fileinput" name="picture" accept="application/x-zip-compressed,image/*">-->
+                <div class="file-upload">
+                    <div class="file-select">
+                        <div class="file-select-button" id="fileName">Choose File</div>
+                        <input type="file"id="fileinput" name="picture" id="chooseFile">
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -79,7 +84,6 @@
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script> var user = '<%= user.username%>'</script>
-
 <script src="../JS/ChatTemplateHandler.js"></script>
 
 </body>

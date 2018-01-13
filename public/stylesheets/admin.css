@@ -9,6 +9,8 @@ div[id="log"] {
     float: left;
 
 }
+
+
 div[id="logo"] {
     overflow: visible;
     min-width: 210px;
@@ -32,7 +34,7 @@ input {
     border-style: solid;
     border-width: 2px;
     border-radius: 50px;
-    background-color: #F26101;
+    background-color: #0D374F;
     border:none;
     width:49%;
     float: left;
@@ -44,7 +46,7 @@ input {
     border-style: solid;
     border-width: 2px;
     border-radius: 50px;
-    background-color: #F26101;
+    background-color: #0D374F;
     border:none;
     width:49%;
     float: left;
@@ -54,7 +56,7 @@ button[id='cAcc']{width:100%;}
 div[id='errors']{
     padding: 0.5% 2%;
     font-size: 20px;
-    color: #F26101;
+    color: #0D374F;
     width: 25vw;
     min-width: 210px;
     max-width: 25vw;
@@ -65,9 +67,9 @@ div[id='errors']{
     outline: none;
 }
 
-form[id='chat'] {  border: 1px; background: #F26101; padding: 0px;  bottom: 0; width: 100%; position: absolute; left: 0; height: 10%;}
+form[id='chat'] {  border: 1px; background: #0D374F; padding: 0px;  bottom: 0; width: 100%; position: absolute; left: 0; height: 10%;}
 form input[id='m'] { border: 0; padding: 10px; width: 90%;
-    margin-right: .5%; background:#F26101; height: 10%;}
+    margin-right: .5%; background:#0D374F; height: 10%; color:white;}
 form button[id='chatB'] { width: 9%; background: white; border: 1px; padding: 0px; border-radius: 50px; height: 90%;
 }
 #messages { list-style-type: none; margin: 0; padding: 0; }

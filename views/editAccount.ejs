@@ -3,15 +3,16 @@
 <head>
     <title>Chat me!</title>
     <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/styleChatTamplate.css">
 </head>
 <body>
-<div id="log">
-</div>
+
+<div class="col-3" id='infoUser'>
 <div class="col-2" id='pozaUser'>
     <img id="profilePicture" height="130" width="130"/>
 </div>
-<div class="col-3" id='infoUser'>
-</div>
+
+
 
     <form action="/editAccount/uploadPicture" method="POST" enctype="multipart/form-data">
         <input id="firstName" name="firstName" type="text" placeholder=<%=user.name%>>

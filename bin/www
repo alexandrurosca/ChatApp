@@ -141,7 +141,12 @@ io.on('connection', function(socket) {
         });
         
         socket.on('chat message photo', function (photo,username) {
-            io.to(photo.room).emit('chat message photo', photo.img,username);
+           // io.to(usersConnected.search(photo.to)).emit('connectToRoom',photo.room);
+            //io.to(usersConnected.search(photo.to)).emit('openChat',photo.room,username);
+            setTimeout(function () {
+                io.to(photo.room).emit('chat message photo', photo.img,username);
+            },200);
+
         })
 
         socket.on('disconnect', function () {
