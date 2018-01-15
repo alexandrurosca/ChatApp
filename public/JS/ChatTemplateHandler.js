@@ -162,9 +162,14 @@ $(function () {
         try{
 
             for(var  i = 0;i<friends.length;i++) {
-                friendsList.innerHTML += "<div class=\"row friend\" id=" + friends[i] + ">" + friends[i] + "</div>";
+                friendsList.innerHTML += "<div class=\"row friend\" id=" + friends[i] + ">" + friends[i] + "<img id ="+ friends[i] +"profileFriend ></div>";
             }
             addListenerFriend();
+
+            friends.forEach(function (friend, item) {
+                var src = "data:image/jpeg;base64," + source;
+                document.getElementById(friend+'profileFriend').setAttribute('src', src);
+            })
             /*for(var  i = 0;i<friends.length;i++) {
                 var friend = document.getElementById(i);
 
