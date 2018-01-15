@@ -202,13 +202,15 @@ $(function () {
                     "<div class=\"col-2 conversationFriend dropdown\" id=" + room + "buttons ><input id=" + room + "button " +
                     " class='change dropbtn' onclick=\"myFunction()\" type=\"button\" value=" + name + ">" +
                     "<div id=\"myDropdown\" class=\" col-2 myDropdown dropdown-content\">\n" +
-                    "<input  class=\"change openConv\" id=" + room + " type=\"button\" value=\"Deschide\">\n" +
-                    "<input  class=\"change closeConv\" id=" + room + " type=\"button\" value=\"Inchide\">\n" +
+                    "<input  class=\"change openConv\" id=" + room + " type=\"button\" value=\"Open\">\n" +
+                    "<input  class=\"change closeConv\" id=" + room + " type=\"button\" value=\"Close\">\n" +
                     "</div></div>";
 
                 openedRoom = room;
                 friend = name;
-                socket.emit("getHistory", openedRoom, username, friend);
+                setTimeout(function () {
+                    socket.emit("getHistory", openedRoom, username, friend);
+                },200);
                 addListenerForOpenConversationButton();
                 addListenerForCloseConversationButton();
                 // addListenerForDrop();

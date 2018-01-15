@@ -74,7 +74,7 @@ exports.form = function (req,res){
             } else {
                 error =[{msg: "User data not modified!"}];
             }
-            res.render('./editAccount.ejs',{error: error,user: user1});
+            res.redirect('http://localhost:3000/');
         })
 
     }

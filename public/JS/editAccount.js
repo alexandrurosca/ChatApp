@@ -6,6 +6,7 @@ $(document).ready(function(){
     socket.emit("profilePicture", username);
     addListenerBackButton();
 
+
 });
 
 $(function () {
@@ -19,6 +20,6 @@ $(function () {
 function addListenerBackButton() {
     document.getElementById('account').addEventListener('click',function () {
         window.history.back();
-        window.history.back();
+
     })
 }

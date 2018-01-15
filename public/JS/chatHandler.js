@@ -5,7 +5,7 @@ $(function () {
 
     socket.on('chat message', function(msg){
         //$('#messages').append($('<li>').text( msg.date + " | " + msg.message ));
-        document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + msg.date + "    |   " +"</i>" +  "<b style='color:black;'>" + msg.message +"  </b></li>";
+        document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + msg.date + "    |   " +"</i>" +  "<b style='color:black; font-size: 120%;'>" +msg.message +"  </b></li>";
         $('#msg').scrollTop($('#msg')[0].scrollHeight);
 
     });
@@ -30,7 +30,7 @@ $(function () {
             }
             messages[1] = messages[1].replace(/"/g,'');
             messages[0] = messages[0].replace(/"/g,'');
-            document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + messages[1] + "    |   " +"</i>" +  "<b style='color:black; font-family: Verdana;font-size: 130%;'>" +messages[0] +"  </b></li>";
+            document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + messages[1] + "    |   " +"</i>" +  "<b style='color:black; font-size: 120%;'>" +messages[0] +"  </b></li>";
             //$('#messages').append($('<li>').text(message ));
         })
 

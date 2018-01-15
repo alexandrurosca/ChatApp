@@ -1,4 +1,4 @@
-*{ font-family:Book Antiqua;}
+*{ font-family:Book Antiqua;}*{ font-family:Book Antiqua;}
 div[id="log"] {
   overflow: auto;
     width: 25vw;
@@ -117,9 +117,18 @@ div[id='errors']{
     color: #0D374F;
     width: 25vw;
     min-width: 210px;
-    max-width: 25vw;
     height: auto;
     margin: 0% 37.5%;
+}
+div[id='errors2']{
+    padding: 0.5% 2%;
+    font-size: 20px;
+    color: #0D374F;
+    width: 25vw;
+    min-width: 210px;
+    height: auto;
+    margin: 0% 37.5%;
+    margin: 0px;
 }
 *:focus {
     outline: none;

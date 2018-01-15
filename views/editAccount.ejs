@@ -46,16 +46,17 @@
         <button id="cAcc">Edit Account</button>
     </form>
     </div>
+    <div id="errors2" class="col-9">
+        <% for(var i=0; i < error.length; i++) { %>
+        &#8227; <%= error[i].msg %><br>
+        <% } %>
+    </div>
 </div>
 
-<div id="errors">
-    <% for(var i=0; i < error.length; i++) { %>
-    &#8227; <%= error[i].msg %><br>
-    <% } %>
-</div>
+
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script> var user = '<%= user.username%>'</script>
+<script> var user = '<%= user.username%>';</script>
 <script src="/JS/editAccount.js"></script>
 
 <script>window.scrollTo(0,document.body.scrollHeight);</script>
