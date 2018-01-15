@@ -265,24 +265,27 @@ exports.findPhotoTest= function(username, callback ){
 };
 
 //CNP verify
-/*
+
 exports.insertCNP = function () {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var myobj = [
             { name: 'Alexandru', lastName: 'Rosca',CNP: '123456'},
-            { name: 'Bianca', lastName: 'Bianca',CNP: '612345'},
+            { name: 'Bianca', lastName: 'Galeata',CNP: '612345'},
             { name: 'Cosmin', lastName: 'Nechifor',CNP: '561234'},
-            { name: 'Mihai', lastName: 'Visovan',CNP: '456123'}
+            { name: 'Mihai', lastName: 'Visovan',CNP: '456123'},
+            { name: 'Alexandru', lastName: 'Balu',CNP: '345612'},
+            { name: 'Beniamin', lastName: 'Bia',CNP: '234561'},
+            { name: 'Cristina', lastName: 'Pelea',CNP: '123456'}
         ];
-        db.collection("customers").insertMany(myobj, function(err, res) {
+        db.collection("persons").insertMany(myobj, function(err, res) {
             if (err) throw err;
             console.log("Number of documents inserted: " + res.insertedCount);
             db.close();
         });
     });
 }
-*/
+
 
 exports.checkCNP = function (name, lastName, cnp, callback) {
     var ok = false;
@@ -290,8 +293,9 @@ exports.checkCNP = function (name, lastName, cnp, callback) {
         if (err) throw err;
         var query = { name: name, lastName: lastName,CNP: cnp};
         console.log(query);
-        db.collection("customers").find(query).toArray(function(err, result) {
+        db.collection("persons").find(query).toArray(function(err, result) {
             if (err) throw err;
+            console.log("Result log: ",result.length);
             if(result.length == 1){
                 ok = true;
             }
