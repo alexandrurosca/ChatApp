@@ -15,10 +15,10 @@
 
 
     <form action="/editAccount/uploadPicture" method="POST" enctype="multipart/form-data">
-        <input id="firstName" name="firstName" type="text" placeholder=<%=user.name%>>
-        <input id="lastName" name="lastName" type="text" placeholder=<%=user.lastName%>>
-        <input id="userName" name="userName" type="text" readonly placeholder=<%=user.username%>>
-        <input id="password" name="password" type="password" placeholder="Password">
+        <input id="firstName" name="firstName" type="text" value = <%=user.name%>>
+        <input id="lastName" name="lastName" type="text" value=<%=user.lastName%>>
+        <input id="userName" name="userName" type="text" readonly value=<%=user.username%>>
+        <input id="password" name="password" type="password" >
         <!--  <input type="file" name="picture" accept="application/x-zip-compressed,image/*">
         <input type="file" name="picture" accept="application/x-zip-compressed,image/*" style="visibility: hidden;"> -->
         <div class="file-upload">
@@ -28,7 +28,7 @@
                 <input type="file" name="picture" accept="application/x-zip-compressed,image/*" id="chooseFile">
             </div>
         </div>
-        <button id="cAcc">Create Account</button>
+        <button id="cAcc">Edit Account</button>
     </form>
 
 </div>

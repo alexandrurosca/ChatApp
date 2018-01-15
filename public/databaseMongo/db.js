@@ -203,17 +203,19 @@ var modified = false;
         if (err) throw err;
         var user1 = {username: user};
         var newValue1;
+        console.log("IsIamge", isImage);
         if(isImage){
-            newValue1 = {$set: {lastName: newValue.lastName, password: newValue.password, img: newValue.img}}
+
+            newValue1 = {$set: {lastName: newValue.lastName, name: newValue.firstName,password: newValue.password, img: newValue.img}}
         }else{
-            newValue1 = {$set: {lastName: newValue.lastName, password: newValue.password}}
+            newValue1 = {$set: {lastName: newValue.lastName, name: newValue.firstName,password: newValue.password}}
         }
         db.collection("users").updateOne(user1,newValue1, function (err, res) {
             if (err) throw err;
             if(res.result.nModified == 1){
                 modified = true;
             }
-            console.log(res);
+           // console.log(res);
             db.close();
             callback(modified);
         });

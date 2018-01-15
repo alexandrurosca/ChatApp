@@ -102,7 +102,7 @@ function onlineOffline() {
 $(function () {
     document.getElementById('infoUser').innerText=username;
     $('#chat').submit(function(){
-        var data = {name:username, msg: $('#m').val(), room: openedRoom, to:friend};
+        var data = {name:username, msg: $('#m').val(), room: openedRoom, to:friend, date: null, message: null};
         socket.emit('chat message', data);
         $('#m').val('');
         return false;

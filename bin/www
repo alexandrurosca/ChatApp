@@ -125,7 +125,8 @@ io.on('connection', function(socket) {
                 date : dateFormat(now)
             };
            // console.log(messageDB);
-
+            message.date = dateFormat(now);
+            message.message = message.name + ' : ' + message.msg;
             setTimeout(function () {
                 io.to(message.room).emit('chat message', message);
                 console.log(message.room);

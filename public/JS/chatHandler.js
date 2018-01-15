@@ -4,8 +4,9 @@ $(function () {
     var indexPoza =0;
 
     socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg.name + " : " +msg.msg));
+        $('#messages').append($('<li>').text( msg.date + " | " + msg.message ));
         $('#msg').scrollTop($('#msg')[0].scrollHeight);
+
     });
     
     socket.on('chat message photo', function (photo,username) {
@@ -22,13 +23,13 @@ $(function () {
     socket.on('system msg', function(msg){
         msg.forEach(function (item, index) {
             var message = "";
+            var messages = [];
             for(var key in item) {
-                message += JSON.stringify(item[key]);
+                messages.push(JSON.stringify(item[key]))
             }
-            message = message.replace('"','');
-            message = message.replace('""','       ');
-            $('#messages').append($('<li>').text(message));
-            message = "";
+            message = messages[1] + " |   "+messages[0];
+            message = message.replace(/"/g,'');
+            $('#messages').append($('<li>').text(message + "asd"));
         })
 
 

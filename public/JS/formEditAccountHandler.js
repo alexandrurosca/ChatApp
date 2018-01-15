@@ -39,14 +39,14 @@ exports.form = function (req,res){
             console.log(req.file.name);
             var encImg = newImg.toString('base64');
             var user  = {
-                name : req.body.firstName,
+                firstName : req.body.firstName,
                 lastName : req.body.lastName,
                 password: req.body.password,
                 img: Buffer(encImg, 'base64')
             };
         }else{
             var user  = {
-                name : req.body.firstName,
+                firstName : req.body.firstName,
                 lastName : req.body.lastName,
                 password: req.body.password
             };
@@ -56,12 +56,15 @@ exports.form = function (req,res){
             //TODO: hard codat, nu sterge
             if(1){
                 //console.log("User from form:", req.body.userName);
-                database.updateUser(req.body.userName, user,isImage, function (modified) {
+                database.updateUser(req.body.userName, user, isImage, function (modified) {
                     if(modified){
                         console.log("User data modified!");
+                    }else{
+                        console.log("User data not modified!");
                     }
                     //mail.sendMail();
                     res.redirect("http://localhost:3000/");
+                    //res.render('./log.ejs');
                 })
             }else{
                 console.log("No real Person");
