@@ -10,6 +10,7 @@ var chat = require('./routes/chat');
 var createAcc = require('./routes/createAcc');
 var chatTemplate = require('./routes/chatTemplate');
 var admin = require('./routes/admin');
+var chatM = require('./routes/mobile');
 var edit = require('./routes/editAccount');
 var session = require('client-sessions');
 var app = express();
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', logIn);
 app.use('/chat',chat);
+app.use('/mobileChat',chatM);
 app.use('/chatTemplate',chatTemplate);
 app.use('/createAccount',createAcc);
 app.use('/admin', admin);

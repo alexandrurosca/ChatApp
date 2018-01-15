@@ -1,8 +1,13 @@
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">
     <link rel="stylesheet" href="../stylesheets/admin.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../stylesheets/emoji.css" rel="stylesheet">
+
+
 </head>
 <body>
 
@@ -13,11 +18,11 @@
     <div class="col-9 buttons" id='options'>
 
         <div class="col-2 button" >
-            <input class='change' id= 'account' name="account" type="button" value="Account">
+            <input class='change' id= 'account' name="account" type="button" value="My account">
 
         </div>
         <div class="col-2 button" >
-            <input  class='change' id= 'logOut' name="logOut" type="button" value="Log Out">
+            <input  class='change' id= 'logOut' name="logOut" type="button" value="Log out">
         </div>
     </div>
 
@@ -25,14 +30,14 @@
         <div class='col-3 opf' id='op1'>
             <form id='addFriends1' >
                 <input id="nameFriendInput" autocomplete="off" /><br>
-                <input  class="change friendListOp" id='addFriendButton' type="button" value="Adauga prieten">
-                <input  class="change friendListOp" id='deleteFriendButton' type="button" value="Sterge prieten">
+                <input  class="change friendListOp" id='addFriendButton' type="button" value="Add friend">
+                <input  class="change friendListOp" id='deleteFriendButton' type="button" value="Delete friend">
             </form>
         </div>
         <div class="col-2" >
         </div>
         <div class="col-2" id='pozaUser'>
-            <img id="profilePicture" height="130" width="130"/>
+            <img id="profilePicture" />
         </div>
         <div class="col-3 " id='infoUser'>
         </div>
@@ -48,12 +53,12 @@
 
     <div class="col-1" id='options'>
         <div class="row" id='option1'>
-            <input  class="change " id='sendPhoto' type="button" value="Trimite poza">
+            <input  class="change " id='sendPhoto' type="button" value="Send photo">
             <form action="/chatTemplate/uploadpicture" method="POST" enctype="multipart/form-data">
               <!--  <input type="file" id="fileinput" name="picture" accept="application/x-zip-compressed,image/*">-->
                 <div class="file-upload">
                     <div class="file-select">
-                        <div class="file-select-button" id="fileName">Choose File</div>
+                        <div class="file-select-button" id="fileName">Choose photo</div>
                         <input type="file"id="fileinput" name="picture" id="chooseFile">
                     </div>
                 </div>
@@ -64,25 +69,12 @@
 
 
     </div>
-</div>
- <div class="col-3" id='optionsFriends'>
-     <!--   <div class='col-3 opf' id='op1'>
-            <form id='addFriends1' >
-                <input   id= 'addFriendButton' type="button" value="Add">
-               <input id="nameFriendInput" autocomplete="off" />
-            </form>
-        </div>
-        <!-- <form id='chat' action="" method="post">
-                <input id="m" autocomplete="off" /><button>Send</button>
-            </form>-->
 
-    <!--<div class='col-1 opf' id='op2'>
-        Op1
-    </div>-->
 
-</div>
+
+
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script> var user = '<%= user.username%>'</script>
 <script src="../JS/ChatTemplateHandler.js"></script>
 

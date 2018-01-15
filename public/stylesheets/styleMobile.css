@@ -1,71 +1,48 @@
 div[id="log"] {
-  overflow: auto;
+    overflow: auto;
     width: 25vw;
     min-width: 210px;
     max-width: 25vw;
     height: auto;
-  margin: 0% 37.5%;
-  padding: 0.1% 0.1%;
+    margin: 0% 37.5%;
+    padding: 0.1% 0.1%;
 
 }
-[class*="col-"] {
-    float: left;
-    padding: 15px;
-}
-.center {
-    margin: 0% 0% 0% 35%;
-    width: 50%;
-    padding: 10px;
-}
-.img{
-    margin: 0% 0% 0% 29%;
-}
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
 img[id='profilePicture'] {
     border-radius: 50%;
     border:solid 1px;
     border-color:#93B8C2;
     width: 130px;
     height: 130px;
+    margin: 0% 0% 0% 30%;
 }
 div[id="logo"] {
-  overflow: visible;
-  min-width: 210px;
-  width: 50%;
-  max-width:50vw;
-  margin: 5% 30% 2%;
+    overflow: visible;
+    min-width: 210px;
+    width: 50%;
+    max-width:50vw;
+    margin: 5% 30% 2%;
 }
 input {
-  width: 100%;
-  padding: 3% 3%;
-  margin: 0.5% 0%;
-  box-sizing: border-box;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 50px;
+    width: 100%;
+    padding: 3% 3%;
+    margin: 0.5% 0%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50px;
 }
 button{
-  padding: 3% 3%;
-  margin: 0.5% 0%;
-  box-sizing: border-box;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 50px;
-  background-color: #93B8C2;
-  border:none;
-  width:49%;
-  float: left;
+    padding: 3% 3%;
+    margin: 0.5% 0%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50px;
+    background-color: #93B8C2;
+    border:none;
+    width:49%;
+    float: left;
 }
 
 input[id='createAcc']{ padding: 3% 3%;

@@ -1,0 +1,104 @@
+<html>
+<script> if (screen.width <= 699) {
+        document.write('<link rel="stylesheet" href="../stylesheets/forMobile.css">');
+    }
+    else
+    //document.write('<link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">');
+        document.write('<link rel="stylesheet" href="../stylesheets/forMobile.css">');
+
+</script>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../stylesheets/admin.css">
+
+
+</head>
+<body>
+
+
+<div class="row">
+    <div class="col-9 buttons" id='options'>
+
+        <div class="col-2 button" >
+            <input class='change' id= 'account' name="account" type="button" value="Account">
+
+        </div>
+        <div class="col-2 button" >
+            <input  class='change' id= 'logOut' name="logOut" type="button" value="Log Out">
+        </div>
+    </div>
+
+    <div class="col-9" id='user'>
+
+        <div class="col-3 " id='infoUser'>
+        </div>
+        <div class="col-2" id='pozaUser'>
+            <img id="profilePicture" />
+        </div>
+
+    </div>
+ <div class="col-3 friendList" id="friendsList">
+    </div>
+
+    <div class='col-3 opf' id='op1'>
+        <div class="add">
+        <form id='addFriends1' >
+            <input id="nameFriendInput" autocomplete="off" /><br>
+            <input  class="change friendListOp" id='addFriendButton' type="button" value="Adauga prieten">
+            <input  class="change friendListOp" id='deleteFriendButton' type="button" value="Sterge prieten">
+        </form>
+        </div>
+    </div>
+    <div class="col-1" id='options'>
+        <input  class="change " id='sendPhoto' type="button" value="Trimite poza">
+    </div>
+    <div class="col-1" id='options'>
+        <div class="row" id='option1'>
+            <form action="/chatTemplate/uploadpicture" method="POST" enctype="multipart/form-data">
+                <!--  <input type="file" id="fileinput" name="picture" accept="application/x-zip-compressed,image/*">-->
+                <div class="file-upload">
+                    <div class="file-select">
+                        <div class="file-select-button" id="fileName">Choose File</div>
+                        <input type="file"id="fileinput" name="picture" id="chooseFile">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+    <div class="col-9 conversation" id= 'conversations'>
+
+    </div>
+
+    <div class="col-8" id='chat'>
+
+    </div>
+
+</div>
+<div class="col-3" id='optionsFriends'>
+    <!--   <div class='col-3 opf' id='op1'>
+           <form id='addFriends1' >
+               <input   id= 'addFriendButton' type="button" value="Add">
+              <input id="nameFriendInput" autocomplete="off" />
+           </form>
+       </div>
+       <!-- <form id='chat' action="" method="post">
+               <input id="m" autocomplete="off" /><button>Send</button>
+           </form>-->
+
+    <!--<div class='col-1 opf' id='op2'>
+        Op1
+    </div>-->
+
+</div>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script> var user = '<%= user.username%>'</script>
+<script src="../JS/ChatTemplateHandler.js"></script>
+
+</body>
+</html>

@@ -1,18 +1,21 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>console.log(screen.width);
+    if(screen.width< 699)
+        document.write('<link rel="stylesheet" href="../stylesheets/styleMobile.css">');
+    else
+        document.write('<link rel="stylesheet" href="../stylesheets/style.css">');</script>
+
 <head>
     <title>Chat me!</title>
-    <link rel="stylesheet" href="../stylesheets/style.css">
-    <link rel="stylesheet" href="../stylesheets/styleChatTamplate.css">
+
 </head>
 <body>
 
-<div class="col-3" id='infoUser'>
-<div class="col-2" id='pozaUser'>
+<div class="col-3 center" id='infoUser'>
+<div class="col-2 img" id='pozaUser'>
     <img id="profilePicture" height="130" width="130"/>
 </div>
-
-
 
     <form action="/editAccount/uploadPicture" method="POST" enctype="multipart/form-data">
         <input id="firstName" name="firstName" type="text" value = <%=user.name%>>

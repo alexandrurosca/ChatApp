@@ -24,7 +24,11 @@ exports.form = function (req,res){
                     req.session.user = user;
                     //res.cookie('user', user.username);
                     console.log("User:", user);
+                    console.log("wid:", req.body.wid);
+                    if(req.body.wid>600)
                      res.render('./chatTemplate.ejs', {user: user});
+                    else
+                        res.render('./mobileChat.ejs', {user: user});
                    /// res.redirect("http://localhost:3000/chatTemplate")
                     console.log("You can go on chat page!");
                 }
