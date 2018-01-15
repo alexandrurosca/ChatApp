@@ -109,8 +109,13 @@ io.on('connection', function(socket) {
 
         socket.on('friendsList', function (username) {
             database.findFriends(username, function (result) {
-                //console.log("List of friends:", result);
-                socket.emit('friendsList', result);
+                var profilesFriends = [];
+                result.forEach(function (user, index) {
+                    database.findPhoto(user, function (photo) {
+                        profilesFriends.push(photo.img.buffer.toString('base64'));
+                    })
+                })
+                socket.emit('friendsList', result, profilesFriends);
             });
 
         });

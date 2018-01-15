@@ -7,7 +7,8 @@ var upload = multer({limits: {fileSize: 2000000 },dest:'/uploads/'});
 
 router.use(expressValidator());
 router.get('/', function(req, res){
-    res.render('./editAccount.ejs',{error: ""});
+    user = req.session.user;
+    res.render('./editAccount.ejs',{error: "", user: user});
 });
 
 router.post('/uploadPicture', upload.single('picture'), formEditAccountHandler.form);

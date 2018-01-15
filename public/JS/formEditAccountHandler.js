@@ -24,56 +24,59 @@ exports.form = function (req,res){
     req.checkBody('CNP','Must insert a your CNP!').notEmpty();
     req.checkBody('CNP','Incorect CNP format!').isNumeric();
     req.checkBody('CNP','Password length minim 8!').isLength({min:3});*/
+
+    req.checkBody('firstName','Must insert  First Name!').notEmpty();
+    req.checkBody('lastName','Must insert  Last Name!').notEmpty();
+    req.checkBody('password','Must insert a password!').notEmpty();
+
     var errors = req.validationErrors();
     console.log(errors);
-    if (errors)  res.render('./editAccount.ejs',{error: errors});
-
-    if (req.file == null) {
-       // res.render('./editAccount.ejs', { error:'Please select a picture file to submit!'});
-        isImage = false;
-
+    if (errors)  {
+        user = req.session.user;
+        res.render('./editAccount.ejs',{error: errors, user: user});
     }
-        if(isImage){
+    else {
+
+
+        if (req.file == null) {
+            // res.render('./editAccount.ejs', { error:'Please select a picture file to submit!'});
+            isImage = false;
+
+        } else {
+            isImage = true;
+        }
+        if (isImage) {
             //profile Picture
             var newImg = fs.readFileSync(req.file.path);
             console.log(req.file.name);
             var encImg = newImg.toString('base64');
-            var user  = {
-                firstName : req.body.firstName,
-                lastName : req.body.lastName,
+            var user = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 password: req.body.password,
                 img: Buffer(encImg, 'base64')
             };
-        }else{
-            var user  = {
-                firstName : req.body.firstName,
-                lastName : req.body.lastName,
+        } else {
+            var user = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 password: req.body.password
             };
         }
 
-        database.checkCNP(user.name,user.lastName, user.CNP, function (realPerson) {
-            //TODO: hard codat, nu sterge
-            if(1){
-                //console.log("User from form:", req.body.userName);
-                database.updateUser(req.body.userName, user, isImage, function (modified) {
-                    if(modified){
-                        console.log("User data modified!");
-                    }else{
-                        console.log("User data not modified!");
-                    }
-                    //mail.sendMail();
-                    res.redirect("http://localhost:3000/");
-                    //res.render('./log.ejs');
-                })
-            }else{
-                console.log("No real Person");
-                res.render('./editAccount.ejs', {error: "No real person"});
+        console.log("User", user);
+
+        database.updateUser(req.body.userName, user, isImage, function (modified) {
+            user1 = req.session.user;
+            var error;
+            if (modified) {
+                error =[{msg: "User data modified!"}];
+            } else {
+                error =[{msg: "User data not modified!"}];
             }
+            res.render('./editAccount.ejs',{error: error,user: user1});
         })
 
-
-
-
+    }
 
 };

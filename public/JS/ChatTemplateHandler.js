@@ -154,7 +154,7 @@ $(function () {
     });
 
 
-    socket.on('friendsList',function (friends) {
+    socket.on('friendsList',function (friends, profilePicture) {
         socket.emit('user login', username);
        // lastIndexOfFriend = friends.length;
         var friendsList = document.getElementById('friendsList');
