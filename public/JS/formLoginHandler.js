@@ -18,7 +18,10 @@ exports.form = function (req,res){
 
                 //admin
                 if(req.body.userName == "admin" && req.body.password == 'admin'){
-                    res.redirect("http://localhost:3000/admin");
+                    //res.redirect("http://localhost:3000/admin");
+                    req.session.user = user;
+
+                    res.render('./admin.ejs',{user: user});
                     //res.render('./admin.ejs');
                 }else {
                     req.session.user = user;

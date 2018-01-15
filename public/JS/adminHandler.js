@@ -32,7 +32,7 @@ $(function () {
     $('#chat').submit(function(){
         var data = {name: 'ADMIN', msg: $('#m').val()};
         socket.emit('chat message admin', data);
-        $('#messages').append($('<li>').text(data.name + ' : ' + data.msg));
+        document.getElementById('messages').innerHTML +=  "<li>"  +  "<b style='color:black; font-family: Verdana;font-size: 130%;'>" + data.name + " : " +data.msg +"  </b></li>";
         $('#m').val('');
         return false;
     });

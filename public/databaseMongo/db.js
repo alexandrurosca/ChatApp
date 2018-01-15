@@ -239,12 +239,16 @@ exports.uploadPhoto = function (newItem, callback) {
 }
 
 exports.findPhoto= function(username, callback ){
+    var found = false;
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         db.collection("users").findOne({username: username}, function(err, result) {
             if (err) throw err;
+            if(result != null){
+                found = true;
+            }
             db.close();
-            callback(result);
+            callback(result, found);
         });
     });
 };

@@ -163,13 +163,22 @@ $(function () {
 
             for(var  i = 0;i<friends.length;i++) {
                 friendsList.innerHTML += "<div class=\"row friend\" id=" + friends[i] + ">" + friends[i] + "<img id ="+ friends[i] +"profileFriend ></div>";
+
             }
             addListenerFriend();
-
+            /*
+            var src = "data:image/jpeg;base64," + imageTry;
+            console.log("SRC:", src);
+            document.getElementById('biaprofileFriend').setAttribute('src', src);
+            */
+            /*
+            var src;
             friends.forEach(function (friend, item) {
-                var src = "data:image/jpeg;base64," + source;
+                src = "data:image/jpeg;base64," + profilePicture.pop();
+                console.log("SRC:", src);
                 document.getElementById(friend+'profileFriend').setAttribute('src', src);
             })
+            */
             /*for(var  i = 0;i<friends.length;i++) {
                 var friend = document.getElementById(i);
 

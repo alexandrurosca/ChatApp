@@ -4,7 +4,8 @@ $(function () {
     var indexPoza =0;
 
     socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text( msg.date + " | " + msg.message ));
+        //$('#messages').append($('<li>').text( msg.date + " | " + msg.message ));
+        document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + msg.date + "    |   " +"</i>" +  "<b style='color:black; font-family: Verdana;font-size: 130%;'>" + msg.message +"  </b></li>";
         $('#msg').scrollTop($('#msg')[0].scrollHeight);
 
     });
@@ -12,7 +13,7 @@ $(function () {
     socket.on('chat message photo', function (photo,username) {
         //document.getElementById('profilePicture').setAttribute('src', photo);
        // $('#messages').append($('<li>').text(msg.name + " : " +msg.msg));
-        document.getElementById('messages').innerHTML +=  "<li>"+username+":</li><img id="+ indexPoza+" src=" + photo + "></img>";
+        document.getElementById('messages').innerHTML +=  "<li>"+username+":</li><img id="+ indexPoza+" src=" + photo + ">";
       //  "height=\"130\" width=\"130\""
 
         document.getElementById(indexPoza).setAttribute('heigth',300);
@@ -27,9 +28,10 @@ $(function () {
             for(var key in item) {
                 messages.push(JSON.stringify(item[key]))
             }
-            message = messages[1] + " |   "+messages[0];
-            message = message.replace(/"/g,'');
-            $('#messages').append($('<li>').text(message + "asd"));
+            messages[1] = messages[1].replace(/"/g,'');
+            messages[0] = messages[0].replace(/"/g,'');
+            document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + messages[1] + "    |   " +"</i>" +  "<b style='color:black; font-family: Verdana;font-size: 130%;'>" +messages[0] +"  </b></li>";
+            //$('#messages').append($('<li>').text(message ));
         })
 
 
