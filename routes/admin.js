@@ -6,7 +6,7 @@ var formAdminHandler = require('../public/JS/formAdminHandler');
 
 
 router.get('/', function(req, res){
-    res.render('./admin.ejs');
+    res.render('./admin.ejs',{error:""});
 });
 
 // Form POST action handler

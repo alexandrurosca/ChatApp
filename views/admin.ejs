@@ -35,7 +35,7 @@
             <div class="file-upload">
                 <div class="file-select">
                     <div class="file-select-button" id="fileName">Choose a photo</div>
-                    <div class="file-select-name" id="noFile">No photo chosen...</div>
+                    <div class="file-select-name" id="noFile"></div>
                     <input type="file" name="picture" accept="application/x-zip-compressed,image/*" id="chooseFile">
                 </div>
             </div>
@@ -44,7 +44,11 @@
         </div>
 </div>
 
-
+<div id="errors" class="col-9">
+    <% for(var i=0; i < error.length; i++) { %>
+    &#8227; <%= error[i].msg %><br>
+    <% } %>
+</div>
 <!-- <div class="col-3" id='optionsFriends'>
    <div class='col-3 opf' id='op1'>
        <form id='addFriends1' >
@@ -60,7 +64,7 @@
 
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script> var user = '<%= user.username%>'</script>
+<script> </script>
 <script src="../JS/adminHandler.js"></script>
 </body>
 </html>
