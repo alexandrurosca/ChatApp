@@ -31,7 +31,7 @@ body { font: 13px Helvetica, Arial; }
     padding: 1% 0% 0% 40%;
 }
 html {
-    font-family: "Lucida Sans", sans-serif;
+    font-family: "Book Antiqua";
 }
 .add{
     margin: 20% 0% 0% 15%;
@@ -228,7 +228,7 @@ div[id='exit']:hover{visibility: visible;}
     left: 12vw;
 }
 
-.file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload{display:block;text-align:center;font-family: "Book Antiqua";font-size: 12px;}
 .file-upload .file-select{border-radius:20px ;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:25px;line-height:40px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
 .file-upload .file-select .file-select-button{background:#dce4ec;padding:0 10px;display:inline-block;height:25px;line-height:20px;}
 .file-upload .file-select .file-select-name{line-height:20px;display:inline-block;padding:0 10px;}

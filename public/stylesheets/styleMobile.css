@@ -43,6 +43,7 @@ button{
     border:none;
     width:49%;
     float: left;
+    font-family: "Book Antiqua";
 }
 
 input[id='createAcc']{ padding: 3% 3%;
@@ -69,9 +70,10 @@ div[id='errors']{
 }
 *:focus {
     outline: none;
+    font-family: "Book Antiqua";
 }
 
-.file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload{display:block;text-align:center;font-family: "Book Antiqua";font-size: 12px;}
 .file-upload .file-select{border-radius:20px ;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
 .file-upload .file-select .file-select-button{background:#dce4ec;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
 .file-upload .file-select .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
