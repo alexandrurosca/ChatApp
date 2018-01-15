@@ -12,15 +12,15 @@
 <div id="logo">  <img src="../images/logo.png" style="max-width:100%;height:auto;"/> </div>
 <div id="log">
     <form action="/createAccount/uploadPicture" method="POST" enctype="multipart/form-data">
-        <input id="firstName" name="firstName" type="text" placeholder="Prenume">
-        <input id="lastName" name="lastName" type="text" placeholder="Nume">
+        <input id="firstName" name="firstName" type="text" placeholder="First Name">
+        <input id="lastName" name="lastName" type="text" placeholder="Last Name">
         <input id="CNP" name="CNP" type="number" placeholder="CNP">
         <input id="userName" name="userName" type="text" placeholder="User name">
-        <input id="password" name="password" type="password" placeholder="Parola">
+        <input id="password" name="password" type="password" placeholder="Password">
         <div class="file-upload">
             <div class="file-select">
-                <div class="file-select-button" id="fileName">Alege o imagine</div>
-                <div class="file-select-name" id="noFile">Nici o imagine aleasa...</div>
+                <div class="file-select-button" id="fileName">Choose a photo</div>
+                <div class="file-select-name" id="noFile">No photo chosen...</div>
                 <input type="file" name="picture" accept="application/x-zip-compressed,image/*" id="chooseFile">
             </div>
         </div>

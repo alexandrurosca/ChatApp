@@ -11,29 +11,41 @@
 
 </head>
 <body>
+<div class="col-12 buttons" id='options'>
 
-<div class="col-3 center" id='infoUser'>
-<div class="col-2 img" id='pozaUser'>
-    <img id="profilePicture" height="130" width="130"/>
+    <div class="col-1 button" >
+        <input class='change' id= 'account' name="account" type="button" value="Back">
+
+    </div>
 </div>
+<div class="col-3 center" id='infoUser'>
 
+<div class="col-12 img" id='pozaUser'>
+    <img id="profilePicture" height="250" width="250"/>
+</div>
+    <div class="col-12">
     <form action="/editAccount/uploadPicture" method="POST" enctype="multipart/form-data">
-        <input id="firstName" name="firstName" type="text" value = <%=user.name%>>
+        <label>First name:</label>
+        <input id="firstName" name="firstName" type="text"  value = <%=user.name%>>
+        <label>Last name:</label>
         <input id="lastName" name="lastName" type="text" value=<%=user.lastName%>>
+        <label>User name:</label>
         <input id="userName" name="userName" type="text" readonly value=<%=user.username%>>
+        <label>Password:</label>
         <input id="password" name="password" type="password" >
+
         <!--  <input type="file" name="picture" accept="application/x-zip-compressed,image/*">
         <input type="file" name="picture" accept="application/x-zip-compressed,image/*" style="visibility: hidden;"> -->
         <div class="file-upload">
             <div class="file-select">
-                <div class="file-select-button" id="fileName">Alege o imagine</div>
-                <div class="file-select-name" id="noFile">Nici o imagine aleasa...</div>
+                <div class="file-select-button" id="fileName">Choose photo</div>
+                <div class="file-select-name" id="noFile">No photo chosen...</div>
                 <input type="file" name="picture" accept="application/x-zip-compressed,image/*" id="chooseFile">
             </div>
         </div>
         <button id="cAcc">Edit Account</button>
     </form>
-
+    </div>
 </div>
 
 <div id="errors">

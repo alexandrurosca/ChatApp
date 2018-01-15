@@ -5,7 +5,7 @@ $(function () {
 
     socket.on('chat message', function(msg){
         //$('#messages').append($('<li>').text( msg.date + " | " + msg.message ));
-        document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + msg.date + "    |   " +"</i>" +  "<b style='color:black; font-family: Verdana;font-size: 130%;'>" + msg.message +"  </b></li>";
+        document.getElementById('messages').innerHTML +=  "<li>" + "<i>" + msg.date + "    |   " +"</i>" +  "<b style='color:black;'>" + msg.message +"  </b></li>";
         $('#msg').scrollTop($('#msg')[0].scrollHeight);
 
     });

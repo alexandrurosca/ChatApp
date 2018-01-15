@@ -4,8 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../stylesheets/styleChatTemplate.css">
     <link rel="stylesheet" href="../stylesheets/admin.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../stylesheets/emoji.css" rel="stylesheet">
+
 
 
 </head>
@@ -75,7 +74,10 @@
 
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<script> var user = '<%= user.username%>'</script>
+<script> var user = '<%= user.username%>';
+    var fistName = '<%= user.name%>';
+    var lastName = '<%= user.lastName%>';
+</script>
 <script src="../JS/ChatTemplateHandler.js"></script>
 
 </body>

@@ -1,3 +1,4 @@
+*{ font-family:Book Antiqua;}
 div[id="log"] {
   overflow: auto;
     width: 25vw;
@@ -16,10 +17,21 @@ div[id="log"] {
     margin: 0% 0% 0% 35%;
     width: 50%;
     padding: 10px;
+
 }
 .img{
-    margin: 0% 0% 0% 29%;
+    margin: 0% 0% 0% 0%;
+    width: 100%;
+    height: 40%;
+    padding: 0% 0% 0% 15% ;
 }
+.buttons{padding:2% 0%;
+    border-bottom:solid 1px;
+    border-color:#93B8C2;
+    padding: 0% 0% 0.0% 0%;
+    float: right;
+    font-family:Book Antiqua;}
+
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
 .col-3 {width: 25%;}
@@ -28,16 +40,35 @@ div[id="log"] {
 .col-6 {width: 50%;}
 .col-7 {width: 58.33%;}
 .col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
+.col-9 {width: 75%; }
 .col-10 {width: 83.33%;}
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
+.change{
+    padding: 3% 3%;
+    margin: 0.5% 0%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50px;
+    background-color: #93B8C2;
+    border:none;
+// width:100%;
+    float: left;
+
+}
+.button{
+    padding: 0% 0%;
+    margin: 0% 0%;
+    float: right;
+    font-family:Book Antiqua;
+}
 img[id='profilePicture'] {
     border-radius: 50%;
     border:solid 1px;
     border-color:#93B8C2;
-    width: 130px;
-    height: 130px;
+    width: 250px;
+    height: 250px;
 }
 div[id="logo"] {
   overflow: visible;
@@ -69,7 +100,7 @@ button{
 }
 
 input[id='createAcc']{ padding: 3% 3%;
-    margin: 0.5% 0%;
+
     box-sizing: border-box;
     border-style: solid;
     border-width: 2px;
@@ -78,7 +109,7 @@ input[id='createAcc']{ padding: 3% 3%;
     border:none;
     width:49%;
     float: left;
-    margin: 0.5% 0.5%;}
+    margin: 0.5% .5%;}
 button[id='cAcc']{width:100%;}
 div[id='errors']{
     padding: 0.5% 2%;
@@ -94,7 +125,7 @@ div[id='errors']{
     outline: none;
 }
 
-.file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload{display:block;text-align:center; font-family:Book Antiqua;font-size: 12px;}
 .file-upload .file-select{border-radius:20px ;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
 .file-upload .file-select .file-select-button{background:#dce4ec;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
 .file-upload .file-select .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}

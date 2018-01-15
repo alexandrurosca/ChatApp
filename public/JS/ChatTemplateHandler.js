@@ -100,7 +100,8 @@ function onlineOffline() {
     }
 }
 $(function () {
-    document.getElementById('infoUser').innerText=username;
+    document.getElementById('infoUser').innerHTML="User: <br><div id='infoo'><i>"+username+
+        "</i></div><br> First name:<br><div id='infoo'><i> " +window.fistName+ "</i></div><br>Last name:<br><div id='infoo'> <i>"+ window.lastName+"</i></div>";
     $('#chat').submit(function(){
         var data = {name:username, msg: $('#m').val(), room: openedRoom, to:friend, date: null, message: null};
         socket.emit('chat message', data);
@@ -154,7 +155,7 @@ $(function () {
     });
 
 
-    socket.on('friendsList',function (friends, profilePicture) {
+    socket.on('friendsList',function (friends) {
         socket.emit('user login', username);
        // lastIndexOfFriend = friends.length;
         var friendsList = document.getElementById('friendsList');
@@ -162,23 +163,10 @@ $(function () {
         try{
 
             for(var  i = 0;i<friends.length;i++) {
-                friendsList.innerHTML += "<div class=\"row friend\" id=" + friends[i] + ">" + friends[i] + "<img id ="+ friends[i] +"profileFriend ></div>";
-
+                friendsList.innerHTML += "<div class=\"row friend\" id=" + friends[i] + ">" + friends[i] + "</div>";
             }
             addListenerFriend();
-            /*
-            var src = "data:image/jpeg;base64," + imageTry;
-            console.log("SRC:", src);
-            document.getElementById('biaprofileFriend').setAttribute('src', src);
-            */
-            /*
-            var src;
-            friends.forEach(function (friend, item) {
-                src = "data:image/jpeg;base64," + profilePicture.pop();
-                console.log("SRC:", src);
-                document.getElementById(friend+'profileFriend').setAttribute('src', src);
-            })
-            */
+            onlineOffline();
             /*for(var  i = 0;i<friends.length;i++) {
                 var friend = document.getElementById(i);
 

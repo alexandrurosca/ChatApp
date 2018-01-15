@@ -5,7 +5,8 @@
     padding: 0;
 
 }
-body { font: 13px Helvetica, Arial; }
+body { font-size: 13px ;
+         font-family:Book Antiqua;}
 .row::after {
     content: "";
     clear: both;
@@ -39,6 +40,7 @@ html {
     border:solid 2px;
     border-color:#93B8C2;
     overflow: auto;
+
 }
 
 .friend{
@@ -49,8 +51,8 @@ html {
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
-    font-size: 100%;
-    font-family: "Georgia", serif;
+    font-size: 110%;
+    font-family:Book Antiqua;
 }
 
 .change{
@@ -64,6 +66,7 @@ html {
     border:none;
    // width:100%;
     float: left;
+    font-family:Book Antiqua;
 
 }
 .change:hover{
@@ -104,8 +107,13 @@ img[id='profilePicture'] {
     border-color:#93B8C2;}
 div[id='infoUser']{
     font-weight: bold;
-    font-size: 110%;
+    font-size: 120%;
     font-family: "Georgia", serif;
+
+    color: #93B8C2;
+}
+div[id='infoo']{
+    color: #385c63;
 }
 div[id='chat']{
     height: 50vh;
@@ -252,7 +260,7 @@ div[id='exit']:hover{visibility: visible;}
     left: 12vw;
 }
 
-.file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload{display:block;text-align:center;font-family: Book Antiqua; font-size: 12px;}
 .file-upload .file-select{border-radius:20px ;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:25px;line-height:25px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
 .file-upload .file-select .file-select-button{background:#dce4ec;padding:0 10px;display:inline-block;height:40px;line-height:20px;}
 .file-upload .file-select .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
